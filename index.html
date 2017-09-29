@@ -6,24 +6,27 @@
     <title>Photo</title>
 
     <!--jQuery-->
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script src="lib/jquery-3.2.1.min.js"></script>
     <!--bootstrap-->
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <!--masonary-->
     <script src="lib/masonry.pkgd.min.js"></script>
 
-    
-    <script src="photoGeter.js"></script>
-    
-    <link href="lib/bootstrap/js/bootstrap.min.css" rel="stylesheet">
+
+    <script src="scriptLoader.js"></script>
+
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
     <h2>Photo</h2>
+    <div id="photopage" class="masonryObject"></div>
     <script>
-        var json = photoGeter.getPhoto();
-        console.log(json);
-
+        var json = photoGeter.fetchPhoto(
+            function(photosArr) {
+                photoView.photoPageConstruct(photosArr)
+            }
+        );
     </script>
 </body>
 

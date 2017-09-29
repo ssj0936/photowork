@@ -3,28 +3,74 @@ var API_KEY = 'ee5075e9d4a5a59568858f65f6195527',
     photoURL = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=' + API_KEY + '&user_id=' + USER_ID + '&format=json';
 
 var photoGeter = (function () {
-    function getPhoto() {
+    var photosArr = [];
+
+    function fetchPhoto(callback) {
         $.ajax({
             url: photoURL,
             method: 'GET',
             dataType: 'text',
             success: function (json) {
                 var jsonObj = flickrJsonParser(json);
-                for(let photoset of jsonObj.photosets.photoset){
+
+                let getURLs = [];
+                for (let photoset of jsonObj.photosets.photoset) {
                     let photosetID = photoset.id;
-                    $.get('https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key='+API_KEY+'&user_id=' + USER_ID + '&photoset_id='+photosetID+'&extras=url_o&format=json',function(resultjson){
-                        let photosetjsonObj = flickrJsonParser(resultjson);
-                        console.log(photosetjsonObj);
-                    });
+                    getURLs.push('https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=' + API_KEY + '&user_id=' + USER_ID + '&photoset_id=' + photosetID + '&extras=url_o&format=json');
                 }
-                console.log(jsonObj);
+
+                var jxhr = [];
+                $.each(getURLs, function (i, url) {
+                    jxhr.push(
+                        $.get(url, function (resultjson) {
+                            let photosetjsonObj = flickrJsonParser(resultjson);
+//                            console.log(photosetjsonObj);
+                            if (photosetjsonObj.stat == 'ok'){
+                                let id = photosetjsonObj.photoset.id,
+                                    title = photosetjsonObj.photoset.title,
+                                    owner = photosetjsonObj.photoset.ownername,
+                                    ownerId = photosetjsonObj.photoset.owner,
+                                    length = parseInt(photosetjsonObj.photoset.total);
+                                
+                                let photosetObj = {
+                                    id:id,
+                                    title:title,
+                                    owner:owner,
+                                    ownerId:ownerId,
+                                    length:length,
+                                    photos:[]
+                                }
+//                                console.log(photosetObj)
+                                for(let photo of photosetjsonObj.photoset.photo){
+                                    photosetObj.photos.push({
+                                        id:photo.id,
+                                        height:photo.height_o,
+                                        width:photo.width_o,
+                                        ispublic:photo.ispublic,
+                                        title:photo.title,
+                                        url:photo.url_o,
+                                    })
+                                }
+                                photosArr.push(photosetObj);
+                            }
+                        })
+                    );
+                });
+
+                $.when.apply($, jxhr).done(function () {
+                    console.log('allDone');
+                    console.log(jsonObj);
+                    console.log(photosArr);
+                    if(callback){
+                        callback(photosArr)
+                    }
+                });
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert("ajaxFetchMapValue:" + xhr.status);
                 alert(thrownError);
             }
         })
-        return 'test';
     }
 
     function flickrJsonParser(text) {
@@ -33,7 +79,11 @@ var photoGeter = (function () {
         return JSON.parse(text);
     }
 
+    function getPhoto(){
+        return photosArr;
+    }
+    
     return {
-        getPhoto: getPhoto,
+        fetchPhoto: fetchPhoto,
     }
 }());

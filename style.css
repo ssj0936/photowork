@@ -1,0 +1,13 @@
+div.photoBlock.longheight {
+    height: 320px;
+}
+
+div.photoBlock.longwidth {
+    width: 320px;
+}
+div.photoBlock{
+/*        float: left;*/
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
