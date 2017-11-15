@@ -48,7 +48,7 @@ var photoGeter = (function () {
                                         width:photo.width_o,
                                         ispublic:photo.ispublic,
                                         title:photo.title,
-                                        url:photo.url_o,
+                                        url:"https://farm"+ photo.farm +".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret +".jpg"
                                     })
                                 }
                                 photosArr.push(photosetObj);

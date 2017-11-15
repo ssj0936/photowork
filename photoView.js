@@ -20,40 +20,42 @@ var photoView = (function () {
                 'background-image': 'url(' + url + ')',
                 height: height_n,
                 width: width_n,
+                
             })
         return photoview;
     }
 
     function masonryfy() {
         $('.masonryObject').masonry({
-                // options
-                itemSelector: 'div.photoBlock',
-                columnWidth: photoLongestLength,
-                //                percentPosition: true,
-            });
+            // options
+            itemSelector: 'div.photoBlock',
+            columnWidth: photoLongestLength,
+            //                percentPosition: true,
+        })
     }
-    
+
     function photoPageConstruct(photosArr) {
-        let count = 0;
+        let count = 0,
+            firstLoadNum = lazyloader.getFirstBookmarkLoadCount();
 
         for (let photoset of photosArr) {
             for (let photo of photoset.photos) {
                 if (photo.ispublic != 1) continue;
 
                 ++count;
-                console.log(count);
                 var view = photoViewConstruct(photo);
                 $('#photopage').append(view);
 
-                if (count >= 10) break;
+                if (count >= firstLoadNum) break;
             }
-            if (count >= 10) break;
+            if (count >= firstLoadNum) break;
         }
-        
         masonryfy();
-    }
+        lazyloader.lazyloaderSetup($(window), $('#photopage'), function () {
+            console.log('scrollToButton');
+        });
 
-    
+    }
 
     return {
         photoViewConstruct: photoViewConstruct,

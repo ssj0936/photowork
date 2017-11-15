@@ -19,8 +19,10 @@
 </head>
 
 <body>
-    <h2>Photo</h2>
-    <div id="photopage" class="masonryObject"></div>
+   <div id="photopageContainer">
+       <div id="photopage" class="masonryObject"></div>
+   </div>
+    
     <script>
         var json = photoGeter.fetchPhoto(
             function(photosArr) {

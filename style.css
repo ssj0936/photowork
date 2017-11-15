@@ -1,13 +1,55 @@
-div.photoBlock.longheight {
-    height: 320px;
+div.photoBlock:hover {
+    opacity: 1;
 }
 
-div.photoBlock.longwidth {
-    width: 320px;
+@media screen and (min-width: 0px) {
+    /*
+    .sizer,
+    div.photoBlock {
+        width: 100%;
+    }
+*/
+    div#photopage {
+        width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 10px;
+    }
+    div.photoBlock {
+        display: inline-block;
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        opacity: 0.5;
+        transition: opacity .3s;
+        cursor: pointer;
+    }
 }
-div.photoBlock{
-/*        float: left;*/
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
+
+@media screen and (min-width: 660px) {
+    div#photopage {
+        width: 660px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 10px;
+    }
 }
+
+@media screen and (min-width: 980px) {
+    div#photopage {
+        width: 980px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 10px;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    div#photopage {
+        width: 1300px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 10px;
+    }
+}
+
