@@ -24,31 +24,33 @@ var photoGeter = (function () {
                     jxhr.push(
                         $.get(url, function (resultjson) {
                             let photosetjsonObj = flickrJsonParser(resultjson);
-//                            console.log(photosetjsonObj);
-                            if (photosetjsonObj.stat == 'ok'){
+                            console.log(photosetjsonObj);
+                            if (photosetjsonObj.stat == 'ok') {
                                 let id = photosetjsonObj.photoset.id,
                                     title = photosetjsonObj.photoset.title,
                                     owner = photosetjsonObj.photoset.ownername,
                                     ownerId = photosetjsonObj.photoset.owner,
                                     length = parseInt(photosetjsonObj.photoset.total);
-                                
+
                                 let photosetObj = {
-                                    id:id,
-                                    title:title,
-                                    owner:owner,
-                                    ownerId:ownerId,
-                                    length:length,
-                                    photos:[]
+                                    id: id,
+                                    title: title,
+                                    owner: owner,
+                                    ownerId: ownerId,
+                                    length: length,
+                                    photos: [],
+                                    allLoaded: false,
                                 }
-//                                console.log(photosetObj)
-                                for(let photo of photosetjsonObj.photoset.photo){
+                                //console.log(photosetObj)
+                                for (let photo of photosetjsonObj.photoset.photo) {
                                     photosetObj.photos.push({
-                                        id:photo.id,
-                                        height:photo.height_o,
-                                        width:photo.width_o,
-                                        ispublic:photo.ispublic,
-                                        title:photo.title,
-                                        url:"https://farm"+ photo.farm +".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret +".jpg"
+                                        id: photo.id,
+                                        height: photo.height_o,
+                                        width: photo.width_o,
+                                        ispublic: photo.ispublic,
+                                        title: photo.title,
+                                        url: "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg",
+                                        loaded: false,
                                     })
                                 }
                                 photosArr.push(photosetObj);
@@ -61,7 +63,7 @@ var photoGeter = (function () {
                     console.log('allDone');
                     console.log(jsonObj);
                     console.log(photosArr);
-                    if(callback){
+                    if (callback) {
                         callback(photosArr)
                     }
                 });
@@ -79,11 +81,12 @@ var photoGeter = (function () {
         return JSON.parse(text);
     }
 
-    function getPhoto(){
+    function getPhoto() {
         return photosArr;
     }
-    
+
     return {
         fetchPhoto: fetchPhoto,
+        getPhoto:getPhoto,
     }
 }());

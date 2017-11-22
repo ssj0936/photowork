@@ -21,7 +21,9 @@ var lazyloader = (function () {
         }
 
         function isScrollToBottomTrigger() {
-            return (container.scrollTop() + container.height() >= content.height() - 100)
+            console.log('scrollTop:'+container.scrollTop());
+            console.log('height:'+container.height());
+            return (container.scrollTop() + container.height() >= content.height())
         }
     }
 
