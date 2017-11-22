@@ -18,8 +18,8 @@ var photoView = (function () {
             })
             .css({
                 'background-image': 'url(' + url + ')',
-                height: height_n,
-                width: width_n,
+                height: '' + height_n + 'px',
+                width: '' + width_n + 'px',
                 border: '3px solid transparent'
             })
         return photoview;
@@ -83,13 +83,13 @@ var photoView = (function () {
             photoset.allLoaded = true;
         }
         masonryfy();
-        lazyloader.lazyloaderSetup($(window), $('#photopageContainer'), function () {
+        lazyloader.lazyloaderSetup(function () {
             lazyloaderAction();
             console.log('scrollToButton');
         });
     }
-    
-    function lazyloaderAction(){
+
+    function lazyloaderAction() {
         let count = 0,
             firstLoadNum = lazyloader.getBookmarkCountPerLoad();
 
@@ -98,7 +98,8 @@ var photoView = (function () {
         for (let photoset of photosArr) {
             if (photoset.allLoaded) continue;
 
-            var container = null;
+            var container = null,
+                masonryAppend = false;
             if ($('div.album').last().attr('data-title') != photoset.title) {
                 var album = jQuery("<div/>", {
                         class: "album",
@@ -119,6 +120,7 @@ var photoView = (function () {
 
             } else {
                 container = $('div.album .masonryObject').last();
+                masonryAppend = true;
             }
 
             for (let photo of photoset.photos) {
@@ -128,22 +130,28 @@ var photoView = (function () {
 
                 ++count;
                 var view = photoViewConstruct(photo);
-                container.append(view);
+
+                if (masonryAppend) {
+                    container.append(view).masonry('appended', view);
+                } else {
+                    container.append(view);
+                }
                 photo.loaded = true;
 
                 if (count >= firstLoadNum)
                     needToBreak = true;
             }
-            if (needToBreak) break;
+            if (!masonryAppend)
+                masonryfy();
 
+            if (needToBreak) break;
             photoset.allLoaded = true;
         }
-        masonryfy();
     }
 
     return {
         photoViewConstruct: photoViewConstruct,
         photoPageConstruct: photoPageConstruct,
-        lazyloaderAction:lazyloaderAction,
+        lazyloaderAction: lazyloaderAction,
     }
 }())

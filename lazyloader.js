@@ -1,14 +1,17 @@
 var lazyloader = (function () {
     var homepageBMNumFirstTime = 40,
-        homepageBMNumPerload = 20;
+        homepageBMNumPerload = 40;
 
     var LAST_SCROLL_TOP = 0;
 
-    function lazyloaderSetup(container, content, callback) {
-        container.scroll(function () {
+    function lazyloaderSetup(callback) {
+        var $container = $(window),
+            container = document.documentElement;
+        $container.scroll(function () {
             if (isDownScrolling()) {
                 if (isScrollToBottomTrigger()) {
                     if (callback) {
+                        console.log('reach');
                         callback();
                     }
                 }
@@ -17,13 +20,11 @@ var lazyloader = (function () {
         });
 
         function isDownScrolling() {
-            return (container.scrollTop() > LAST_SCROLL_TOP);
+            return ($container.scrollTop() > LAST_SCROLL_TOP);
         }
 
         function isScrollToBottomTrigger() {
-            console.log('scrollTop:'+container.scrollTop());
-            console.log('height:'+container.height());
-            return (container.scrollTop() + container.height() >= content.height())
+            return ($container.scrollTop() + $container.height() >= container.scrollHeight)
         }
     }
 

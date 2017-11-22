@@ -9,7 +9,7 @@ div.photoBlock:hover {
         width: 100%;
     }
 */
-    div#photopage {
+    div.album {
         width: 340px;
         margin-left: auto;
         margin-right: auto;
@@ -27,7 +27,7 @@ div.photoBlock:hover {
 }
 
 @media screen and (min-width: 660px) {
-    div#photopage {
+    div.album {
         width: 660px;
         margin-left: auto;
         margin-right: auto;
@@ -36,7 +36,7 @@ div.photoBlock:hover {
 }
 
 @media screen and (min-width: 980px) {
-    div#photopage {
+    div.album {
         width: 980px;
         margin-left: auto;
         margin-right: auto;
@@ -45,7 +45,7 @@ div.photoBlock:hover {
 }
 
 @media screen and (min-width: 1300px) {
-    div#photopage {
+    div.album {
         width: 1300px;
         margin-left: auto;
         margin-right: auto;
