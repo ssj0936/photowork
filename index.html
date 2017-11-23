@@ -19,16 +19,29 @@
 </head>
 
 <body>
-   <div id="photopageContainer">
-<!--       <div id="photopage" class="masonryObject"></div>-->
-   </div>
-    
+    <div id="mainPageContainer">
+        <div id="sideNav">
+            <div id="logoContainer">
+                <img id="logo" src="img/logo.png" alt="">
+            </div>
+            <div id="sideNavOptionContainer">
+                <div class="sideNavOption"> AbouT Me </div>
+                <div class="sideNavOption"> WorkS </div>
+                <div class="sideNavOption"> ContacT Me </div>
+            </div>
+        </div>
+        <div id="mainPage">
+            <div id="photopageContainer"> </div>
+        </div>
+    </div>
+
     <script>
         var json = photoGeter.fetchPhoto(
             function(photosArr) {
                 photoView.photoPageConstruct(photosArr)
             }
         );
+
     </script>
 </body>
 

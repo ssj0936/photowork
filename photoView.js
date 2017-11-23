@@ -1,5 +1,5 @@
 var photoView = (function () {
-    var photoLongestLength = 320;
+    var photoLongestLength = 240;
 
     function photoViewConstruct(photometa) {
         var id = photometa.id,
