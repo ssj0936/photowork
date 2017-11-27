@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 body {
     padding-top: 20px;
+    overflow-y: scroll;
 }
 
 * {
@@ -67,7 +68,7 @@ div.photoBlock {
     cursor: pointer;
 }
 
-div.album{
+div.album {
     margin-bottom: 2em;
 }
 
@@ -91,37 +92,60 @@ div.album{
 
 @media screen and (min-width: 769px) {
     div#sideNav {
+        position: fixed;
         display: flex;
         flex-direction: column;
-        width: 280px;
-        flex: 0 0 280px;
+        width: 300px;
+        flex: 0 0 300px;
     }
-     body {
+    body {
         text-align: -webkit-auto;
     }
-}
-
-
-@media screen and (min-width: 0px) and (max-width: 280px) {
-    div#mainPageContainer {
-        width: 100px;
+    div#mainPage {
+        margin-left: 280px;
     }
 }
 
-@media screen and (min-width: 280px) and (max-width: 520px) {
+
+@media screen and (min-width: 0px) and (max-width: 520px) {
     div#mainPageContainer {
-        width: 240px;
+        width: 100%;
+        padding: 0 2em;
+    }
+
+    .masonrySizer,
+    .photoBlockImg {
+        width: 100%;
+    }
+
+    .photoBlockImg {
+        height: auto;
     }
 }
 
 @media screen and (min-width: 520px) and (max-width: 768px) {
     div#mainPageContainer {
-        width: 480px;
+        width: 100%;
+        padding: 0 2em;
+    }
+
+    .masonrySizer,
+    .photoBlockImg {
+        width: 50%;
+    }
+
+    .photoBlockImg {
+        height: auto;
     }
 }
 
-@media screen and (min-width: 520px) and (max-width: 768px) {
-    div#mainPageContainer {
-        width: 480px;
+@media screen and (min-width: 768px) {
+    .masonrySizer,
+    .photoBlockImg {
+        width: 25%;
+    }
+
+    .photoBlockImg {
+        height: auto;
     }
 }

@@ -1,5 +1,30 @@
 var photoView = (function () {
-    var photoLongestLength = 240;
+    //    var photoLongestLength = 240;
+
+    function onResize() {
+        $(window).resize(function () {
+            console.log(getPhotoLongestLength());
+
+            $('.photoBlock').css({
+                height: '' + ($(this).height * (getPhotoLongestLength() / $(this).width)) + 'px',
+                width: '' + getPhotoLongestLength() + 'px',
+            });
+//            console.log('???');
+            setTimeout(function () {
+                $('.masonryObject').masonry('layout');
+            }, 2000);
+
+//            $('.masonryObject').masonry('layout');
+        });
+    }
+
+    function getPhotoLongestLength() {
+        var photoLongestLength = ($('div#divWorks').innerWidth() > 768) ? (($('div#divWorks').innerWidth()) / 4) :
+            ($('div#divWorks').innerWidth() > 520) ? (($('div#divWorks').innerWidth()) / 2) :
+            ($('div#divWorks').innerWidth());
+
+        return photoLongestLength;
+    }
 
     function photoViewConstruct(photometa) {
         var id = photometa.id,
@@ -7,9 +32,10 @@ var photoView = (function () {
             width = photometa.width,
             ispublic = photometa.ispublic,
             title = photometa.title,
-            url = photometa.url;
+            url = photoGeter.getPhotoUrl(photometa, 'Medium 640');
 
-        let ratio = photoLongestLength / parseInt(width),
+        console.log(getPhotoLongestLength());
+        let ratio = getPhotoLongestLength() / parseInt(width),
             height_n = height * ratio,
             width_n = width * ratio;
 
@@ -22,16 +48,67 @@ var photoView = (function () {
                 width: '' + width_n + 'px',
                 border: '3px solid transparent'
             })
+
+        //        var photoview = jQuery('<img/>', {
+        //                class: 'photoBlockImg',
+        //                src: url,
+        //            })
+        //            .css({
+        //                border: '3px solid transparent'
+        //            })
         return photoview;
     }
 
-    function masonryfy() {
-        $('.masonryObject').masonry({
-            // options
-            itemSelector: 'div.photoBlock',
-            columnWidth: photoLongestLength,
-            //                percentPosition: true,
-        })
+    //    function masonryfy() {
+    //        $('.masonryObject').each(function () {
+    //            if (!$(this).first().hasClass('masonrySizer')) {
+    //                jQuery('<div/>', {
+    //                    class: 'masonrySizer'
+    //                }).prependTo(this)
+    //            }
+    //
+    //            if (!$(this).hasClass('masonryInited')) {
+    //                var $masonry = $(this).masonry({
+    //                    // options
+    //                    itemSelector: '.photoBlockImg',
+    //                    columnWidth: '.masonrySizer',
+    //                    //            itemSelector: 'div.photoBlock',
+    //                    //            columnWidth: getPhotoLongestLength(),
+    //                    percentPosition: true,
+    //                });
+    //
+    //                $masonry.imagesLoaded().progress(function () {
+    //                    $masonry.masonry('layout');
+    //                });
+    //                
+    //                $(this).addClass('masonryInited');
+    //            }
+    //        });
+    //    }
+
+    function masonryfy(target) {
+        if (!$(target).first().hasClass('masonrySizer')) {
+            jQuery('<div/>', {
+                class: 'masonrySizer'
+            }).prependTo(target)
+        }
+
+        if (!$(target).hasClass('masonryInited')) {
+            var $masonry = $(target).masonry({
+                // options
+                //                itemSelector: '.photoBlockImg',
+                //                columnWidth: '.masonrySizer',
+                itemSelector: 'div.photoBlock',
+                columnWidth: getPhotoLongestLength(),
+                percentPosition: true,
+            });
+
+            $masonry.imagesLoaded().progress(function () {
+                $masonry.masonry('layout');
+            });
+
+            $(target).addClass('masonryInited');
+        }
     }
 
     function photoPageConstruct(photosArr) {
@@ -64,6 +141,7 @@ var photoView = (function () {
             } else {
                 container = $('div.album .masonryObject').last();
             }
+            container = $('div.album .masonryObject').last();
 
             for (let photo of photoset.photos) {
                 if (photo.ispublic != 1) continue;
@@ -82,7 +160,10 @@ var photoView = (function () {
 
             photoset.allLoaded = true;
         }
-        masonryfy();
+        $('.masonryObject').each(function () {
+            masonryfy(this);
+        })
+
         lazyloader.lazyloaderSetup(function () {
             lazyloaderAction();
             console.log('scrollToButton');
@@ -141,15 +222,22 @@ var photoView = (function () {
                 if (count >= firstLoadNum)
                     needToBreak = true;
             }
-            if (!masonryAppend)
-                masonryfy();
+            //            if (!masonryAppend)
+            //                masonryfy();
+
 
             if (needToBreak) break;
             photoset.allLoaded = true;
         }
+        $('.masonryObject').not('.masonryInited').each(function () {
+            console.log(this);
+            masonryfy(this);
+        })
+        //        masonryfy();
     }
 
     return {
+        onResize: onResize,
         photoViewConstruct: photoViewConstruct,
         photoPageConstruct: photoPageConstruct,
         lazyloaderAction: lazyloaderAction,
