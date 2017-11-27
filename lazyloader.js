@@ -1,6 +1,6 @@
 var lazyloader = (function () {
     var homepageBMNumFirstTime = 40,
-        homepageBMNumPerload = 40;
+        homepageBMNumPerload = 20;
 
     var LAST_SCROLL_TOP = 0;
 
@@ -11,7 +11,6 @@ var lazyloader = (function () {
             if (isDownScrolling()) {
                 if (isScrollToBottomTrigger()) {
                     if (callback) {
-                        console.log('reach');
                         callback();
                     }
                 }

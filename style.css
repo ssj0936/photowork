@@ -1,14 +1,11 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 body {
     padding-top: 20px;
+    /*    overflow-y: scroll;*/
 }
 
 * {
     font-family: 'Noto Sans TC';
-}
-
-div.photoBlock:hover {
-    opacity: 0.5;
 }
 
 div#mainPageContainer {
@@ -57,6 +54,7 @@ div#mainPage {
     flex: 1 1 auto;
 }
 
+/*
 div.photoBlock {
     display: inline-block;
     background-size: cover;
@@ -66,9 +64,30 @@ div.photoBlock {
     transition: opacity .3s;
     cursor: pointer;
 }
+*/
+/*
+div.photoBlock:hover {
+    opacity: 0.5;
+}
+*/
 
-div.album{
+img.photoBlockImg {
+    opacity: 1;
+    transition: opacity .3s;
+    cursor: pointer;
+}
+
+img.photoBlockImg:hover {
+    opacity: 0.5;
+}
+
+div.album {
     margin-bottom: 2em;
+}
+
+div.albumContent{
+    border-top:4px solid #EEE ;
+    padding-top: 5px;
 }
 
 /* side navibar style */
@@ -85,43 +104,79 @@ div.album{
     div.albumTitle {
         text-align: -webkit-auto;
     }
+
+    @media screen and (min-width: 0px) and (max-width: 520px) {
+        div#mainPageContainer {
+            width: 100%;
+            padding: 0 2em;
+        }
+
+        .masonrySizer,
+        .photoBlockImg {
+            width: 100%;
+        }
+    }
+
+    @media screen and (min-width: 520px) and (max-width: 768px) {
+        div#mainPageContainer {
+            width: 100%;
+            padding: 0 2em;
+        }
+
+        .masonrySizer,
+        .photoBlockImg {
+            width: 50%;
+        }
+    }
 }
 
 /* desktop */
 
 @media screen and (min-width: 769px) {
     div#sideNav {
+        position: fixed;
         display: flex;
         flex-direction: column;
-        width: 280px;
-        flex: 0 0 280px;
+        width: 300px;
+        flex: 0 0 300px;
     }
-     body {
+    body {
         text-align: -webkit-auto;
     }
-}
-
-
-@media screen and (min-width: 0px) and (max-width: 280px) {
-    div#mainPageContainer {
-        width: 100px;
+    div#mainPage {
+        margin-left: 300px;
     }
-}
 
-@media screen and (min-width: 280px) and (max-width: 520px) {
     div#mainPageContainer {
-        width: 240px;
+        width: 100%;
+        padding: 0 2em;
     }
-}
 
-@media screen and (min-width: 520px) and (max-width: 768px) {
-    div#mainPageContainer {
-        width: 480px;
+    @media screen and (min-width: 768px) and (max-width: 960px) {
+        .masonrySizer,
+        .photoBlockImg {
+            width: 100%;
+        }
     }
-}
-
-@media screen and (min-width: 520px) and (max-width: 768px) {
-    div#mainPageContainer {
-        width: 480px;
+    
+    @media screen and (min-width: 960px) and (max-width: 1200px) {
+        .masonrySizer,
+        .photoBlockImg {
+            width: 50%;
+        }
+    }
+    
+    @media screen and (min-width: 1200px) and (max-width: 1440px) {
+        .masonrySizer,
+        .photoBlockImg {
+            width: 33.33%;
+        }
+    }
+    
+    @media screen and (min-width: 1440px){
+        .masonrySizer,
+        .photoBlockImg {
+            width: 25%;
+        }
     }
 }

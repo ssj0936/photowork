@@ -49,7 +49,9 @@ var photoGeter = (function () {
                                         width: photo.width_o,
                                         ispublic: photo.ispublic,
                                         title: photo.title,
-                                        url: "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + ".jpg",
+                                        farm: photo.farm,
+                                        server: photo.server,
+                                        secret: photo.secret,
                                         loaded: false,
                                     })
                                 }
@@ -75,6 +77,19 @@ var photoGeter = (function () {
         })
     }
 
+    function getPhotoUrl(meta, size) {
+        let sizetag = (size == "Thumbnail") ? '_t' :
+            (size == "Small") ? '_t' :
+            (size == "Small 320") ? '_n     ' :
+            (size == "Medium") ? '' :
+            (size == "Medium 640") ? '_z' :
+            (size == "Medium 800") ? '_c' :
+            (size == "Large") ? '_b' : '';
+
+        return "https://farm" + meta.farm + ".staticflickr.com/" + meta.server + "/" + meta.id + "_" + meta.secret + sizetag + ".jpg";
+
+    }
+
     function flickrJsonParser(text) {
         text = text.replace(/^jsonFlickrApi/, '')
         text = text.substring(1, text.length - 1);
@@ -86,7 +101,8 @@ var photoGeter = (function () {
     }
 
     return {
+        getPhotoUrl: getPhotoUrl,
         fetchPhoto: fetchPhoto,
-        getPhoto:getPhoto,
+        getPhoto: getPhoto,
     }
 }());

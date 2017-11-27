@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Photo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--jQuery-->
     <script src="lib/jquery-3.2.1.min.js"></script>
@@ -11,6 +12,8 @@
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <!--masonary-->
     <script src="lib/masonry.pkgd.min.js"></script>
+
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 
 
     <script src="scriptLoader.js"></script>
@@ -25,17 +28,31 @@
                 <img id="logo" src="img/logo.png" alt="">
             </div>
             <div id="sideNavOptionContainer">
-                <div class="sideNavOption"> AbouT Me </div>
-                <div class="sideNavOption"> WorkS </div>
-                <div class="sideNavOption"> ContacT Me </div>
+                <div class="sideNavOption" data-target="divAboutMe"> AbouT Me </div>
+                <div class="sideNavOption" data-target="divWorks"> WorkS </div>
+                <div class="sideNavOption" data-target="divContactMe"> ContacT Me </div>
             </div>
         </div>
         <div id="mainPage">
-            <div id="photopageContainer"> </div>
+            <div id="divAboutMe" class="sideNavItem" style="display: none">
+                <div id="aboutMeContainer">
+                    <p>AbouT Me</p>
+                </div>
+            </div>
+            <div id="divWorks" class="sideNavItem">
+                <div id="photopageContainer"> </div>
+            </div>
+            <div id="divContactMe" class="sideNavItem" style="display: none">
+                <div id="ContactMeContainer">
+                    <p>ContacT Me</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
+//        photoView.onResize();
+        
         var json = photoGeter.fetchPhoto(
             function(photosArr) {
                 photoView.photoPageConstruct(photosArr)
