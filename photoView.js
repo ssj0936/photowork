@@ -50,6 +50,14 @@ var photoView = (function () {
             .css({
                 border: '3px solid transparent'
             })
+
+        //        var photoview = jQuery('<img/>', {
+        //                class: 'photoBlockImg',
+        //                src: url,
+        //            })
+        //            .css({
+        //                border: '3px solid transparent'
+        //            })
         return photoview;
     }
 
