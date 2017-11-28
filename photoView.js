@@ -2,14 +2,6 @@ var photoView = (function () {
     function onResize() {
         $(window).resize(function () {
             console.log(getPhotoLongestLength());
-
-            $('.photoBlock').css({
-                height: '' + ($(this).height * (getPhotoLongestLength() / $(this).width)) + 'px',
-                width: '' + getPhotoLongestLength() + 'px',
-            });
-            setTimeout(function () {
-                $('.masonryObject').masonry('layout');
-            }, 2000);
         });
     }
 
@@ -29,64 +21,47 @@ var photoView = (function () {
             title = photometa.title,
             url = photoGeter.getPhotoUrl(photometa, 'Medium 640');
 
-//        let ratio = getPhotoLongestLength() / parseInt(width),
-//            height_n = height * ratio,
-//            width_n = width * ratio;
-
-        //        var photoview = jQuery('<div/>', {
-        //                class: 'photoBlock'
-        //            })
-        //            .css({
-        //                'background-image': 'url(' + url + ')',
-        //                height: '' + height_n + 'px',
-        //                width: '' + width_n + 'px',
-        //                border: '3px solid transparent'
-        //            })
+        //        let ratio = getPhotoLongestLength() / parseInt(width),
+        //            height_n = height * ratio,
+        //            width_n = width * ratio;
 
         var photoview = jQuery('<img/>', {
-                class: 'photoBlockImg',
-                src: url,
-            })
-            .css({
-                border: '3px solid transparent'
-            })
+            class: 'photoBlockImg',
+            src: url,
+        })
 
-        //        var photoview = jQuery('<img/>', {
-        //                class: 'photoBlockImg',
-        //                src: url,
-        //            })
-        //            .css({
-        //                border: '3px solid transparent'
-        //            })
+        photoview.click(function () {
+            $('div#photopageContainer, div#photoDetail ').toggleClass('hide');
+
+            //empty first
+            $('div#photoDetail div#photoDetailImg, div#photoDetail div#photoDetailMeta').empty();
+
+            //append new content
+            $('div#photoDetail div#photoDetailImg').append(
+                    jQuery('<img/>', {
+                        src: photoGeter.getPhotoUrl(photometa, 'Large')
+                    })
+                )
+                .click(function () {
+                    $('div#photopageContainer, div#photoDetail ').toggleClass('hide');
+                });
+
+
+
+            photoGeter.getExif(photometa, function (jsonObj) {
+                //append new meta
+                $('div#photoDetail div#photoDetailMeta').append(
+                    jQuery('<div/>', {
+                        class: 'photoDetailMeta'
+                    })
+                    .text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi scelerisque placerat est non lobortis. Maecenas finibus felis non felis mollis placerat. Nam sagittis nulla mi, vel interdum sem rhoncus at. Vivamus porta eleifend rutrum. Nullam vel eros in lacus lobortis tincidunt pharetra at nibh. Morbi vel sodales dui. Curabitur molestie mattis felis, sit amet laoreet tellus ultricies nec. Praesent quis dui ac massa tempus aliquet. Maecenas egestas nulla non nisl dapibus, sed imperdiet neque tristique. Fusce hendrerit velit ac felis semper pharetra. Nunc pellentesque, magna id condimentum ornare, eros risus interdum nunc, at maximus mi dolor pulvinar nunc. Vestibulum vestibulum, quam et semper efficitur, diam felis maximus libero, non efficitur turpis nulla et justo. Proin dapibus vel sem a ullamcorper. Aenean lectus eros, sagittis vitae placerat eget, imperdiet et eratLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi scelerisque placerat est non lobortis. Maecenas finibus felis non felis mollis placerat. Nam sagittis nulla mi, vel interdum sem rhoncus at. Vivamus porta eleifend rutrum. Nullam vel eros in lacus lobortis tincidunt pharetra at nibh. Morbi vel sodales dui. Curabitur molestie mattis felis, sit amet laoreet tellus ultricies nec. Praesent quis dui ac massa tempus aliquet. Maecenas egestas nulla non nisl dapibus, sed imperdiet neque tristique. Fusce hendrerit velit ac felis semper pharetra. Nunc pellentesque, magna id condimentum ornare, eros risus interdum nunc, at maximus mi dolor pulvinar nunc. Vestibulum vestibulum, quam et semper efficitur, diam felis maximus libero, non efficitur turpis nulla et justo. Proin dapibus vel sem a ullamcorper. Aenean lectus eros, sagittis vitae placerat eget, imperdiet et eratLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi scelerisque placerat est non lobortis. Maecenas finibus felis non felis mollis placerat. Nam sagittis nulla mi, vel interdum sem rhoncus at. Vivamus porta eleifend rutrum. Nullam vel eros in lacus lobortis tincidunt pharetra at nibh. Morbi vel sodales dui. Curabitur molestie mattis felis, sit amet laoreet tellus ultricies nec. Praesent quis dui ac massa tempus aliquet. Maecenas egestas nulla non nisl dapibus, sed imperdiet neque tristique. Fusce hendrerit velit ac felis semper pharetra. Nunc pellentesque, magna id condimentum ornare, eros risus interdum nunc, at maximus mi dolor pulvinar nunc. Vestibulum vestibulum, quam et semper efficitur, diam felis maximus libero, non efficitur turpis nulla et justo. Proin dapibus vel sem a ullamcorper. Aenean lectus eros, sagittis vitae placerat eget, imperdiet et erat.')
+                    //                    .text(JSON.stringify(jsonObj))
+                )
+                //                console.log(jsonObj);
+            })
+        })
         return photoview;
     }
-
-    //    function masonryfy() {
-    //        $('.masonryObject').each(function () {
-    //            if (!$(this).first().hasClass('masonrySizer')) {
-    //                jQuery('<div/>', {
-    //                    class: 'masonrySizer'
-    //                }).prependTo(this)
-    //            }
-    //
-    //            if (!$(this).hasClass('masonryInited')) {
-    //                var $masonry = $(this).masonry({
-    //                    // options
-    //                    itemSelector: '.photoBlockImg',
-    //                    columnWidth: '.masonrySizer',
-    //                    //            itemSelector: 'div.photoBlock',
-    //                    //            columnWidth: getPhotoLongestLength(),
-    //                    percentPosition: true,
-    //                });
-    //
-    //                $masonry.imagesLoaded().progress(function () {
-    //                    $masonry.masonry('layout');
-    //                });
-    //                
-    //                $(this).addClass('masonryInited');
-    //            }
-    //        });
-    //    }
 
     function masonryfy(target) {
         if (!$(target).first().hasClass('masonrySizer')) {
@@ -95,22 +70,19 @@ var photoView = (function () {
             }).prependTo(target)
         }
 
-//        if (!$(target).hasClass('masonryInited')) {
-            var $masonry = $(target).masonry({
-                // options
-                itemSelector: '.photoBlockImg',
-                columnWidth: '.masonrySizer',
-                //                itemSelector: 'div.photoBlock',
-                //                columnWidth: getPhotoLongestLength(),
-                percentPosition: true,
-            });
+        //        if (!$(target).hasClass('masonryInited')) {
+        var $masonry = $(target).masonry({
+            // options
+            itemSelector: '.photoBlockImg',
+            columnWidth: '.masonrySizer',
+            percentPosition: true,
+        });
 
-            $masonry.imagesLoaded().always(function () {
-                $masonry.masonry('layout');
-            });
-
-//            $(target).addClass('masonryInited');
-//        }
+        $masonry.imagesLoaded().always(function () {
+            $masonry.masonry('layout');
+        });
+        //            $(target).addClass('masonryInited');
+        //        }
     }
 
     function photoPageConstruct(photosArr) {
@@ -224,10 +196,6 @@ var photoView = (function () {
                 if (count >= firstLoadNum)
                     needToBreak = true;
             }
-            //            if (!masonryAppend)
-            //                masonryfy();
-
-
             if (needToBreak) break;
             photoset.allLoaded = true;
         }

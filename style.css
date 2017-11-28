@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
 body {
-    padding-top: 20px;
+    /*    padding-top: 20px;*/
 }
 
 * {
@@ -12,12 +12,7 @@ div#mainPageContainer {
     display: inline-flex;
 }
 
-div#sideNav {
-    display: flex;
-    flex-direction: column;
-    width: 280px;
-    flex: 0 0 280px;
-}
+
 
 div#sideNav #logoContainer {
     display: flex;
@@ -42,15 +37,17 @@ div#sideNav .sideNavOption {
     line-height: 2;
     padding: 2px 0;
     cursor: pointer;
-    transition: background-color .5s;
+    transition: background-color .5s, color .5s;
 }
 
 div#sideNav .sideNavOption:hover {
-    background-color: whitesmoke;
+    background-color: #CFDADC;
+    color: #4B5C66;
 }
 
 div#mainPage {
     flex: 1 1 auto;
+    background-color: #FFF;
 }
 
 /*
@@ -64,6 +61,7 @@ div.photoBlock {
     cursor: pointer;
 }
 */
+
 /*
 div.photoBlock:hover {
     opacity: 0.5;
@@ -74,6 +72,7 @@ img.photoBlockImg {
     opacity: 1;
     transition: opacity .3s;
     cursor: pointer;
+    border: 5px solid transparent
 }
 
 img.photoBlockImg:hover {
@@ -84,16 +83,19 @@ div.album {
     margin-bottom: 2em;
 }
 
-div.albumContent{
-    border-top:4px solid #EEE ;
+div.albumContent {
+    border-top: 4px solid #CFDADC;
     padding-top: 5px;
 }
 
-/* side navibar style */
+div#divAboutMe,
+div#divContactMe {
+    height: -webkit-fill-available;
+}
 
-/* mobile */
+/* side navibar style --- mobile*/
 
-@media screen and (min-width: 0px) {
+@media screen and (max-width: 768px) {
     div#sideNav {
         display: none;
     }
@@ -129,27 +131,35 @@ div.albumContent{
     }
 }
 
-/* desktop */
+/* side navibar style --- desktop */
 
 @media screen and (min-width: 769px) {
+
     div#sideNav {
         position: fixed;
+        padding-top: 40px;
         display: flex;
         flex-direction: column;
-        width: 300px;
-        flex: 0 0 300px;
+        width: 280px;
+        flex: 0 0 280px;
+        color: #CFDADC;
+
+        height: -webkit-fill-available;
+        background-color: #4B5C66;
     }
+
     body {
         text-align: -webkit-auto;
     }
     div#mainPage {
-        margin-left: 300px;
+        margin-left: 280px;
+        padding: 20px 20px 0px 20px;
+        color: #4B5C66;
     }
 
     div#mainPageContainer {
         width: 100%;
-        padding: 0 2em;
-
+        /*        padding: 0 2em;*/
     }
 
     @media screen and (min-width: 768px) and (max-width: 960px) {
@@ -158,25 +168,32 @@ div.albumContent{
             width: 100%;
         }
     }
-    
+
     @media screen and (min-width: 960px) and (max-width: 1200px) {
         .masonrySizer,
         .photoBlockImg {
             width: 50%;
         }
     }
-    
+
     @media screen and (min-width: 1200px) and (max-width: 1440px) {
         .masonrySizer,
         .photoBlockImg {
             width: 33.33%;
         }
     }
-    
-    @media screen and (min-width: 1440px){
+
+    @media screen and (min-width: 1440px) and (max-width: 1600px) {
         .masonrySizer,
         .photoBlockImg {
             width: 25%;
+        }
+    }
+
+    @media screen and (min-width: 1600px) {
+        .masonrySizer,
+        .photoBlockImg {
+            width: 20%;
         }
     }
 }
