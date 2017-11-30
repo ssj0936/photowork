@@ -33,6 +33,17 @@
                 <div class="sideNavOption" data-target="divContactMe"> ContacT Me </div>
             </div>
         </div>
+        <div id="exifInfoSection">
+          <div id="exifInfoBtnContainer">
+              <span id="btnCloseExifInfo" class="functionbtn glyphicon glyphicon-remove-circle"></span>
+          </div>
+           
+            <div id="exifInfoDetailContainer">
+               <div id="exifInfoDetail">
+                   
+               </div>
+            </div>
+        </div>
         <div id="mainPage">
             <div id="divAboutMe" class="sideNavItem" style="display: none">
                 <div id="aboutMeContainer">
@@ -41,9 +52,15 @@
             </div>
             <div id="divWorks" class="sideNavItem">
                 <div id="photopageContainer"> </div>
-                <div id="photoDetail" class="hide">
+                <div id="photoDetail" style="display: none">
+                    <div id="infoButton">
+                        <span id="btnBackToPhotoWall" class="functionbtn glyphicon glyphicon-circle-arrow-left" style="margin-bottom: 0.75em"></span>
+                        <span id="btnShowExif" class="functionbtn glyphicon glyphicon-info-sign"></span>
+                        <span id="btnDownload" class="functionbtn glyphicon glyphicon-download"></span>
+                    </div>
+<!--                   <button class="floating-btn is--off" id="sub-scrn-btn"></button>-->
                     <div id="photoDetailImg"></div>
-                    <div id="photoDetailMeta"></div>
+<!--                    <div id="photoDetailMeta"></div>-->
                 </div>
             </div>
             <div id="divContactMe" class="sideNavItem" style="display: none">

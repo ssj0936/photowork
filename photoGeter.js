@@ -1,26 +1,31 @@
 var API_KEY = 'ee5075e9d4a5a59568858f65f6195527',
     USER_ID = '27389068@N08',
     photoURL = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=' + API_KEY + '&user_id=' + USER_ID + '&format=json';
-    
+
 
 var photoGeter = (function () {
     var photosArr = [];
 
-    function getExif(photometa,callback){
+    function getExif(photometa, callback) {
         var exifURL = 'https://api.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=' + API_KEY + '&photo_id=' + photometa.id + '&secret=' + photometa.secret + '&format=json';
-        
+
         $.ajax({
             url: exifURL,
             method: 'GET',
             dataType: 'text',
             success: function (json) {
-                console.log(exifURL);
-                console.log(photometa);
+                //                console.log(exifURL);
+                //                console.log(photometa);
                 var jsonObj = flickrJsonParser(json);
-                console.log(jsonObj);
-                
-                if(callback){
-                    callback(jsonObj);
+                var exif = {};
+                exif.camera = jsonObj.photo.camera;
+
+                for (var obj of jsonObj.photo.exif) {
+                    exif[obj.tag] = obj.raw._content;
+                }
+
+                if (callback) {
+                    callback(exif);
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -29,7 +34,7 @@ var photoGeter = (function () {
             }
         });
     }
-    
+
     function fetchPhoto(callback) {
         $.ajax({
             url: photoURL,
@@ -70,13 +75,14 @@ var photoGeter = (function () {
                                 for (let photo of photosetjsonObj.photoset.photo) {
                                     photosetObj.photos.push({
                                         id: photo.id,
-                                        height: photo.height_o,
-                                        width: photo.width_o,
+//                                        height: photo.height_o,
+//                                        width: photo.width_o,
                                         ispublic: photo.ispublic,
                                         title: photo.title,
                                         farm: photo.farm,
                                         server: photo.server,
                                         secret: photo.secret,
+                                        url_o: photo.url_o,
                                         loaded: false,
                                     })
                                 }
@@ -88,9 +94,9 @@ var photoGeter = (function () {
 
                 $.when.apply($, jxhr).done(function () {
                     console.log('allDone');
-//                    console.log(jsonObj);
-//                    console.log(photosArr);
-                    photosArr.sort(function(a,b){
+                    //                    console.log(jsonObj);
+                    //                    console.log(photosArr);
+                    photosArr.sort(function (a, b) {
                         return b.photos.length - a.photos.length;
                     })
                     if (callback) {
@@ -129,7 +135,7 @@ var photoGeter = (function () {
     }
 
     return {
-        getExif:getExif,
+        getExif: getExif,
         getPhotoUrl: getPhotoUrl,
         fetchPhoto: fetchPhoto,
         getPhoto: getPhoto,

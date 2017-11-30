@@ -50,24 +50,6 @@ div#mainPage {
     background-color: #FFF;
 }
 
-/*
-div.photoBlock {
-    display: inline-block;
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    opacity: 0.8;
-    transition: opacity .3s;
-    cursor: pointer;
-}
-*/
-
-/*
-div.photoBlock:hover {
-    opacity: 0.5;
-}
-*/
-
 img.photoBlockImg {
     opacity: 1;
     transition: opacity .3s;
@@ -91,6 +73,72 @@ div.albumContent {
 div#divAboutMe,
 div#divContactMe {
     height: -webkit-fill-available;
+}
+
+div#photoDetail {
+    height: 100vh;
+    display: flex;
+}
+
+img.photoDetailImg {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+div#photoDetailImg {
+    height: 100%;
+    padding: 2em;
+
+    /*
+    display: flex;
+    justify-content: center;
+    align-content: center;
+*/
+}
+
+div#photoDetailMeta {
+    /*    height: 30%;*/
+    overflow-y: auto;
+}
+
+button.floating-btn {
+    background: #181717;
+    position: fixed;
+    left: 1em;
+    bottom: 1em;
+    padding: 3.2em 2em;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 60;
+    outline: none;
+}
+
+div#infoButton {
+    background-color: #CFDADC;
+    flex: 0 0 70px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 40px;
+}
+
+span.functionbtn {
+    display: block;
+    font-size: 30px;
+    padding: 5px;
+    cursor: pointer;
+    opacity: .8;
+    transition: opacity .5s;
+}
+
+span.functionbtn:hover {
+    opacity: .5;
+}
+
+div#photopageContainer {
+    padding: 20px;
 }
 
 /* side navibar style --- mobile*/
@@ -148,12 +196,48 @@ div#divContactMe {
         background-color: #4B5C66;
     }
 
+    div#exifInfoSection {
+        position: fixed;
+        padding-top: 40px;
+        display: flex;
+        flex-direction: column;
+        width: 0px;
+        color: #CFDADC;
+
+        height: -webkit-fill-available;
+        background-color: #B5AEA5;
+        z-index: 50;
+        word-break: break-all;
+        overflow: hidden;
+        transition: width .7s;
+    }
+
+    div#exifInfoBtnContainer {
+        justify-content: flex-end;
+        display: flex;
+        flex: 0 0 40px;
+    }
+
+    div#exifInfoDetailContainer {
+        padding: 10px;
+        flex: 1 1 auto;
+    }
+
+    span.functionbtn#btnCloseExifInfo {
+        text-align: center;
+        width: 70px;
+    }
+
+    div#exifInfoSection.showing {
+        width: 350px;
+    }
+
     body {
         text-align: -webkit-auto;
     }
     div#mainPage {
         margin-left: 280px;
-        padding: 20px 20px 0px 20px;
+        /*        padding: 20px;*/
         color: #4B5C66;
     }
 

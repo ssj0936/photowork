@@ -35,9 +35,14 @@ var lazyloader = (function () {
         return homepageBMNumPerload;
     }
 
+    function getLastScrollTop() {
+        return LAST_SCROLL_TOP;
+    }
+
     return {
         lazyloaderSetup: lazyloaderSetup,
         getFirstBookmarkLoadCount: getFirstBookmarkLoadCount,
         getBookmarkCountPerLoad: getBookmarkCountPerLoad,
+        getLastScrollTop: getLastScrollTop,
     }
 }());

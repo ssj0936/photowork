@@ -15,8 +15,8 @@ var photoView = (function () {
 
     function photoViewConstruct(photometa) {
         var id = photometa.id,
-            height = photometa.height,
-            width = photometa.width,
+            //            height = photometa.height,
+            //            width = photometa.width,
             ispublic = photometa.ispublic,
             title = photometa.title,
             url = photoGeter.getPhotoUrl(photometa, 'Medium 640');
@@ -31,34 +31,26 @@ var photoView = (function () {
         })
 
         photoview.click(function () {
-            $('div#photopageContainer, div#photoDetail ').toggleClass('hide');
+            //cache data
+            localStorage['photometa'] = JSON.stringify(photometa);            
+            
+            var isLandScape = $(this).width() > $(this).height();
+            console.log(isLandScape);
+//            $('div#photopageContainer, div#photoDetail ').toggleClass('hide');
+            $('div#photopageContainer').fadeOut();
+            $('div#photoDetail').show();
+
 
             //empty first
-            $('div#photoDetail div#photoDetailImg, div#photoDetail div#photoDetailMeta').empty();
+            $('div#photoDetail div#photoDetailImg, div#photoDetail div#photoDetailMeta').off().empty();
 
             //append new content
             $('div#photoDetail div#photoDetailImg').append(
-                    jQuery('<img/>', {
-                        src: photoGeter.getPhotoUrl(photometa, 'Large')
-                    })
-                )
-                .click(function () {
-                    $('div#photopageContainer, div#photoDetail ').toggleClass('hide');
-                });
-
-
-
-            photoGeter.getExif(photometa, function (jsonObj) {
-                //append new meta
-                $('div#photoDetail div#photoDetailMeta').append(
-                    jQuery('<div/>', {
-                        class: 'photoDetailMeta'
-                    })
-                    .text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi scelerisque placerat est non lobortis. Maecenas finibus felis non felis mollis placerat. Nam sagittis nulla mi, vel interdum sem rhoncus at. Vivamus porta eleifend rutrum. Nullam vel eros in lacus lobortis tincidunt pharetra at nibh. Morbi vel sodales dui. Curabitur molestie mattis felis, sit amet laoreet tellus ultricies nec. Praesent quis dui ac massa tempus aliquet. Maecenas egestas nulla non nisl dapibus, sed imperdiet neque tristique. Fusce hendrerit velit ac felis semper pharetra. Nunc pellentesque, magna id condimentum ornare, eros risus interdum nunc, at maximus mi dolor pulvinar nunc. Vestibulum vestibulum, quam et semper efficitur, diam felis maximus libero, non efficitur turpis nulla et justo. Proin dapibus vel sem a ullamcorper. Aenean lectus eros, sagittis vitae placerat eget, imperdiet et eratLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi scelerisque placerat est non lobortis. Maecenas finibus felis non felis mollis placerat. Nam sagittis nulla mi, vel interdum sem rhoncus at. Vivamus porta eleifend rutrum. Nullam vel eros in lacus lobortis tincidunt pharetra at nibh. Morbi vel sodales dui. Curabitur molestie mattis felis, sit amet laoreet tellus ultricies nec. Praesent quis dui ac massa tempus aliquet. Maecenas egestas nulla non nisl dapibus, sed imperdiet neque tristique. Fusce hendrerit velit ac felis semper pharetra. Nunc pellentesque, magna id condimentum ornare, eros risus interdum nunc, at maximus mi dolor pulvinar nunc. Vestibulum vestibulum, quam et semper efficitur, diam felis maximus libero, non efficitur turpis nulla et justo. Proin dapibus vel sem a ullamcorper. Aenean lectus eros, sagittis vitae placerat eget, imperdiet et eratLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi scelerisque placerat est non lobortis. Maecenas finibus felis non felis mollis placerat. Nam sagittis nulla mi, vel interdum sem rhoncus at. Vivamus porta eleifend rutrum. Nullam vel eros in lacus lobortis tincidunt pharetra at nibh. Morbi vel sodales dui. Curabitur molestie mattis felis, sit amet laoreet tellus ultricies nec. Praesent quis dui ac massa tempus aliquet. Maecenas egestas nulla non nisl dapibus, sed imperdiet neque tristique. Fusce hendrerit velit ac felis semper pharetra. Nunc pellentesque, magna id condimentum ornare, eros risus interdum nunc, at maximus mi dolor pulvinar nunc. Vestibulum vestibulum, quam et semper efficitur, diam felis maximus libero, non efficitur turpis nulla et justo. Proin dapibus vel sem a ullamcorper. Aenean lectus eros, sagittis vitae placerat eget, imperdiet et erat.')
-                    //                    .text(JSON.stringify(jsonObj))
-                )
-                //                console.log(jsonObj);
-            })
+                jQuery('<img/>', {
+                    class: 'photoDetailImg',
+                    src: photometa.url_o,
+                })
+            );
         })
         return photoview;
     }
