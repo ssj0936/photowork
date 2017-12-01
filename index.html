@@ -22,6 +22,16 @@
 </head>
 
 <body>
+    <div id="photoDetailModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="mainPageContainer">
         <div id="sideNav">
             <div id="logoContainer">
@@ -34,14 +44,19 @@
             </div>
         </div>
         <div id="exifInfoSection">
-          <div id="exifInfoBtnContainer">
-              <span id="btnCloseExifInfo" class="functionbtn glyphicon glyphicon-remove-circle"></span>
-          </div>
-           
+            <div id="exifInfoBtnContainer">
+                <span id="btnCloseExifInfo" class="functionbtn glyphicon glyphicon-remove-circle"></span>
+            </div>
+
             <div id="exifInfoDetailContainer">
-               <div id="exifInfoDetail">
-                   
-               </div>
+                <div id="exifInfoDetail"> </div>
+                <div class="divider"></div>
+                <div id="exifInfoOtherDetail">
+<!--
+                    <div class="exifDataContainer" id="showAllExif">EXIF</div>
+                    <div class="exifDataContainer" id="toFlickrPage">To Flickr</div>
+-->
+                </div>
             </div>
         </div>
         <div id="mainPage">
@@ -50,17 +65,17 @@
                     <p>AbouT Me</p>
                 </div>
             </div>
-            <div id="divWorks" class="sideNavItem">
+            <div id="divWorks" class="sideNavItem clicking">
                 <div id="photopageContainer"> </div>
-                <div id="photoDetail" style="display: none">
+                <div id="photoDetail">
                     <div id="infoButton">
                         <span id="btnBackToPhotoWall" class="functionbtn glyphicon glyphicon-circle-arrow-left" style="margin-bottom: 0.75em"></span>
                         <span id="btnShowExif" class="functionbtn glyphicon glyphicon-info-sign"></span>
                         <span id="btnDownload" class="functionbtn glyphicon glyphicon-download"></span>
                     </div>
-<!--                   <button class="floating-btn is--off" id="sub-scrn-btn"></button>-->
+                    <!--                   <button class="floating-btn is--off" id="sub-scrn-btn"></button>-->
                     <div id="photoDetailImg"></div>
-<!--                    <div id="photoDetailMeta"></div>-->
+                    <!--                    <div id="photoDetailMeta"></div>-->
                 </div>
             </div>
             <div id="divContactMe" class="sideNavItem" style="display: none">
@@ -71,7 +86,7 @@
         </div>
     </div>
 
-    <script>        
+    <script>
         var json = photoGeter.fetchPhoto(
             function(photosArr) {
                 photoView.photoPageConstruct(photosArr)

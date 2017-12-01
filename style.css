@@ -57,9 +57,7 @@ img.photoBlockImg {
     border: 5px solid transparent
 }
 
-img.photoBlockImg:hover {
-    opacity: 0.5;
-}
+
 
 div.album {
     margin-bottom: 2em;
@@ -77,7 +75,13 @@ div#divContactMe {
 
 div#photoDetail {
     height: 100vh;
+    display: none;
+}
+
+div#photoDetail.photoDetailShowing {
+    position: fixed;
     display: flex;
+    top: 0px;
 }
 
 img.photoDetailImg {
@@ -139,11 +143,21 @@ span.functionbtn:hover {
 
 div#photopageContainer {
     padding: 20px;
+    transition: -webkit-filter .5s, opacity .5s;
+}
+
+div#photopageContainer.photoDetailShowing {
+    opacity: .3;
+    -webkit-filter: grayscale(100%);
 }
 
 /* side navibar style --- mobile*/
 
 @media screen and (max-width: 768px) {
+    div#exifInfoSection {
+        display: none;
+    }
+
     div#sideNav {
         display: none;
     }
@@ -153,6 +167,18 @@ div#photopageContainer {
     div.albumTitle {
         text-align: -webkit-auto;
     }
+
+/*
+    div#mainPageContainer {
+        width: 100%;
+        padding: 0 2em;
+    }
+    
+    .masonrySizer,
+    .photoBlockImg {
+        width: 100%;
+    }
+*/
 
     @media screen and (min-width: 0px) and (max-width: 520px) {
         div#mainPageContainer {
@@ -182,6 +208,9 @@ div#photopageContainer {
 /* side navibar style --- desktop */
 
 @media screen and (min-width: 769px) {
+    img.photoBlockImg:hover {
+        opacity: 0.5;
+    }
 
     div#sideNav {
         position: fixed;
@@ -202,7 +231,7 @@ div#photopageContainer {
         display: flex;
         flex-direction: column;
         width: 0px;
-        color: #CFDADC;
+        color: #4B5C66;
 
         height: -webkit-fill-available;
         background-color: #B5AEA5;
@@ -219,8 +248,8 @@ div#photopageContainer {
     }
 
     div#exifInfoDetailContainer {
-        padding: 10px;
         flex: 1 1 auto;
+        padding: 10px 30px;
     }
 
     span.functionbtn#btnCloseExifInfo {
@@ -244,6 +273,16 @@ div#photopageContainer {
     div#mainPageContainer {
         width: 100%;
         /*        padding: 0 2em;*/
+    }
+
+    img.exifDataTitleIcon {
+        width: 48px;
+        height: 48px;
+        margin: 15px;
+    }
+
+    div.exifDataContainer {
+        width: fit-content;
     }
 
     @media screen and (min-width: 768px) and (max-width: 960px) {

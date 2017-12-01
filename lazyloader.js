@@ -8,6 +8,8 @@ var lazyloader = (function () {
         var $container = $(window),
             container = document.documentElement;
         $container.scroll(function () {
+            if(!$('div#photopageContainer').is(':visible')) return;
+            
             if (isDownScrolling()) {
                 if (isScrollToBottomTrigger()) {
                     if (callback) {
@@ -16,6 +18,7 @@ var lazyloader = (function () {
                 }
             }
             LAST_SCROLL_TOP = $(this).scrollTop();
+            console.log(LAST_SCROLL_TOP);
         });
 
         function isDownScrolling() {

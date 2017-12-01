@@ -31,15 +31,16 @@ var photoView = (function () {
         })
 
         photoview.click(function () {
-            //cache data
-            localStorage['photometa'] = JSON.stringify(photometa);            
+            if(isModile()) return;
             
+            //cache data
+            localStorage['photometa'] = JSON.stringify(photometa);
+
             var isLandScape = $(this).width() > $(this).height();
             console.log(isLandScape);
-//            $('div#photopageContainer, div#photoDetail ').toggleClass('hide');
-            $('div#photopageContainer').fadeOut();
-            $('div#photoDetail').show();
-
+//            $('div#photopageContainer').fadeOut();
+//            $('div#photoDetail').show();
+            $('div#photopageContainer, div#photoDetail').addClass('photoDetailShowing');
 
             //empty first
             $('div#photoDetail div#photoDetailImg, div#photoDetail div#photoDetailMeta').off().empty();
@@ -51,6 +52,22 @@ var photoView = (function () {
                     src: photometa.url_o,
                 })
             );
+
+            //            //---------------------------------------
+            //            //empty first
+            //            $('div#photoDetailModal .modal-body').empty();
+            //
+            //            //append new content
+            //            $('div#photoDetailModal .modal-body').append(
+            //                jQuery('<img/>', {
+            //                    class: 'photoDetailImg',
+            //                    src: photometa.url_o,
+            //                })
+            //            );
+            //
+            //            $('#photoDetailModal')
+            //                .modal('show');
+            //---------------------------------------
         })
         return photoview;
     }
