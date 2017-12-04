@@ -18,7 +18,7 @@ var lazyloader = (function () {
                 }
             }
             LAST_SCROLL_TOP = $(this).scrollTop();
-            console.log(LAST_SCROLL_TOP);
+//            console.log(LAST_SCROLL_TOP);
         });
 
         function isDownScrolling() {

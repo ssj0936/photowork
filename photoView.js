@@ -26,32 +26,43 @@ var photoView = (function () {
         //            width_n = width * ratio;
 
         var photoview = jQuery('<img/>', {
-            class: 'photoBlockImg',
+            class: 'photoBlockImg loading',
             src: url,
         })
 
         photoview.click(function () {
-            if(isModile()) return;
-            
+            if (isModile()) return;
+
             //cache data
             localStorage['photometa'] = JSON.stringify(photometa);
 
             var isLandScape = $(this).width() > $(this).height();
-            console.log(isLandScape);
-//            $('div#photopageContainer').fadeOut();
-//            $('div#photoDetail').show();
+            //            console.log(isLandScape);
+            //            $('div#photopageContainer').fadeOut();
+            //            $('div#photoDetail').show();
             $('div#photopageContainer, div#photoDetail').addClass('photoDetailShowing');
 
             //empty first
             $('div#photoDetail div#photoDetailImg, div#photoDetail div#photoDetailMeta').off().empty();
 
             //append new content
-            $('div#photoDetail div#photoDetailImg').append(
+            let imgContainer = $('div#photoDetail div#photoDetailImg');
+
+            $('div#photoDetailImg').append(createLoadingAnimation());
+            imgContainer.append(
                 jQuery('<img/>', {
-                    class: 'photoDetailImg',
+                    class: 'photoDetailImg loading',
                     src: photometa.url_o,
                 })
             );
+
+            imgContainer.imagesLoaded()
+                .always(function () {
+                    console.log('img load finish');
+                    imgContainer.children('img.photoDetailImg').removeClass('loading');
+                    imgContainer.children('.sk-fading-circle').remove();
+                });
+
 
             //            //---------------------------------------
             //            //empty first
@@ -89,6 +100,7 @@ var photoView = (function () {
 
         $masonry.imagesLoaded().always(function () {
             $masonry.masonry('layout');
+            $('img.photoBlockImg.loading').removeClass('loading');
         });
         //            $(target).addClass('masonryInited');
         //        }

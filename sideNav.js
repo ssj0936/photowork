@@ -76,6 +76,8 @@ var nav = (function () {
             let data = exif[exifAttr[index]],
                 displayName = exifAttrDisplayName[index];
 
+            if(typeof data == 'undefined') continue;
+            
             jQuery('<div/>', {
                     class: 'exifDataContainer'
                 })
