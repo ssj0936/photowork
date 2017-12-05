@@ -13,8 +13,8 @@ var nav = (function () {
         EXIF_ATTR_ISO = 'ISO',
         EXIF_ATTR_CAMERA = 'camera';
 
-    var exifAttr = ['camera'/*, 'CreatorTool'*/, 'ExposureTime', 'FNumber', 'Flash', 'FocalLength', 'ISO'],
-        exifAttrDisplayName = ['Camera'/*, 'CreatorTool'*/, 'ExposureTime', 'FNumber', 'Flash', 'FocalLength', 'ISO'];
+    var exifAttr = ['camera' /*, 'CreatorTool'*/ , 'ExposureTime', 'FNumber', 'Flash', 'FocalLength', 'ISO'],
+        exifAttrDisplayName = ['Camera' /*, 'CreatorTool'*/ , 'ExposureTime', 'FNumber', 'Flash', 'FocalLength', 'ISO'];
 
     function sideNavSetting() {
         $('div.sideNavOption').click(function () {
@@ -32,7 +32,14 @@ var nav = (function () {
         $('span.functionbtn').click(function () {
             switch ($(this).attr('id')) {
                 case 'btnBackToPhotoWall':
+                    //remove photo detail
                     $('div#photopageContainer, div#photoDetail').removeClass('photoDetailShowing');
+                    
+                    //collapse exif container
+                    $('div#exifInfoSection').removeClass('showing');
+                    var exifContainer = $('div#exifInfoDetail');
+                    exifContainer.empty();
+                    
                     console.log('btnBackToPhotoWall');
                     break;
                 case 'btnShowExif':
@@ -40,10 +47,10 @@ var nav = (function () {
 
                     photoGeter.getExif(photometa, function (exif) {
                         console.log(exif);
-                        //                        $('div#exifInfoDetail').empty().text(JSON.stringify(exif));
                         exifDataViewConstruct(exif);
                     })
 
+                    //expend exif container
                     $('div#exifInfoSection').addClass('showing');
                     console.log('btnShowExif');
                     break;
@@ -59,10 +66,22 @@ var nav = (function () {
                     break;
 
                 case 'btnCloseExifInfo':
+                    //remove photo detail
+                    $('div#photopageContainer, div#photoDetail').removeClass('photoDetailShowing');
+                    
+                    //collapse exif container
                     $('div#exifInfoSection').removeClass('showing');
                     var exifContainer = $('div#exifInfoDetail');
                     exifContainer.empty();
                     console.log('btnCloseExifInfo');
+                    break;
+
+                case 'btnbackPhotoDetail':
+                    //collapse exif container
+                    $('div#exifInfoSection').removeClass('showing');
+                    var exifContainer = $('div#exifInfoDetail');
+                    exifContainer.empty();
+                    console.log('btnbackPhotoDetail');
                     break;
             }
         })
@@ -76,8 +95,15 @@ var nav = (function () {
             let data = exif[exifAttr[index]],
                 displayName = exifAttrDisplayName[index];
 
-            if(typeof data == 'undefined') continue;
-            
+            if (typeof data == 'undefined' || data == '') continue;
+
+            if(displayName == EXIF_ATTR_FNUMBER)
+                data = 'f/'+data;
+            else if(displayName == EXIF_ATTR_ISO)
+                data = 'ISO '+data;
+            else if(displayName == EXIF_ATTR_EXPOSURE_TIME)
+                data = data+' Sec';
+               
             jQuery('<div/>', {
                     class: 'exifDataContainer'
                 })
@@ -104,7 +130,34 @@ var nav = (function () {
                 )
                 .appendTo(exifContainer)
         }
-
+        
+        //no basic exif data
+        if(exifContainer.children().length == 0){
+            jQuery('<div/>', {
+                    class: 'exifDataContainer'
+                })
+                .append(
+                    jQuery('<span/>', {
+                        class: 'exifDataTitle'
+                    })
+                    .append(
+                        jQuery('<img/>', {
+                            class: 'exifDataTitleIcon',
+                            src: "img/exifIcon/icon_no_basic_data.png",
+                        })
+                    )
+                )
+                .append(
+                    jQuery('<span/>', {
+                        class: 'exifDataContent'
+                    })
+                    .text("No Basic Exif Data")
+                    .css({
+                        color: '#555',
+                    })
+                )
+                .appendTo(exifContainer)
+        }
     }
 
     return {

@@ -25,6 +25,7 @@ div#sideNav #logo {
 }
 
 div#sideNav #sideNavOptionContainer {
+    padding-top: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,13 +78,17 @@ div#divContactMe {
 
 div#photoDetail {
     height: 100vh;
+    flex: 1 1 auto;
     display: none;
+    opacity: 0;
+    transition: opacity .5s;
 }
 
 div#photoDetail.photoDetailShowing {
     position: fixed;
     display: flex;
     top: 0px;
+    opacity: 1;
 }
 
 img.photoDetailImg {
@@ -103,6 +108,7 @@ div#photoDetailImg {
     height: 100%;
     padding: 2em;
     position: relative;
+    margin-left: 70px;
 
     /*
     display: flex;
@@ -131,11 +137,30 @@ button.floating-btn {
 
 div#infoButton {
     background-color: #CFDADC;
-    flex: 0 0 70px;
-    display: flex;
+    /* flex: 0 0 70px; */
+    /* display: flex; */
+    /*    min-width: 0px;*/
+    /*    opacity: 0;*/
+    position: fixed;
+    height: 100vh;
+    overflow: hidden;
     flex-direction: column;
     text-align: center;
     padding-top: 40px;
+    animation: grow .5s;
+    animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes grow {
+    from {
+        width: 0px;
+        opacity: 1;
+    }
+
+    to {
+        width: 70px;
+        opacity: 1;
+    }
 }
 
 span.functionbtn {
@@ -152,6 +177,7 @@ span.functionbtn:hover {
 }
 
 div#photopageContainer {
+    flex: 1 1 auto;
     padding: 20px;
     transition: -webkit-filter .5s, opacity .5s;
 }
@@ -159,6 +185,10 @@ div#photopageContainer {
 div#photopageContainer.photoDetailShowing {
     opacity: .3;
     -webkit-filter: grayscale(100%);
+}
+
+div#divWorks {
+    display: flex;
 }
 
 /* side navibar style --- mobile*/
@@ -240,7 +270,7 @@ div#photopageContainer.photoDetailShowing {
         display: flex;
         flex-direction: column;
         width: 0px;
-        color: #4B5C66;
+        color: #F1F0EE;
 
         height: -webkit-fill-available;
         background-color: #B5AEA5;
@@ -251,23 +281,32 @@ div#photopageContainer.photoDetailShowing {
     }
 
     div#exifInfoBtnContainer {
-        justify-content: flex-end;
+        justify-content: space-between;
         display: flex;
         flex: 0 0 40px;
+        padding: 0px 40px;
     }
 
     div#exifInfoDetailContainer {
         flex: 1 1 auto;
-        padding: 10px 30px;
+        padding: 10px 40px;
+        margin-top: 3em;
     }
 
-    span.functionbtn#btnCloseExifInfo {
-        text-align: center;
-        width: 70px;
+    div#exifInfoBtnContainer span.functionbtn {
+        padding: 5px 0px 0px 0px;
+    }
+
+    div#exifInfoBtnContainer span.functionbtn#btnbackPhotoDetail {
+        text-align: left;
+    }
+
+    div#exifInfoBtnContainer span.functionbtn#btnCloseExifInfo {
+        text-align: right;
     }
 
     div#exifInfoSection.showing {
-        width: 350px;
+        width: 280px;
     }
 
     body {
@@ -285,9 +324,9 @@ div#photopageContainer.photoDetailShowing {
     }
 
     img.exifDataTitleIcon {
-        width: 48px;
-        height: 48px;
-        margin: 15px;
+        width: 36px;
+        height: 36px;
+        margin: 10px 15px 10px 0px;
     }
 
     div.exifDataContainer {

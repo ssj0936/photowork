@@ -37,9 +37,6 @@ var photoView = (function () {
             localStorage['photometa'] = JSON.stringify(photometa);
 
             var isLandScape = $(this).width() > $(this).height();
-            //            console.log(isLandScape);
-            //            $('div#photopageContainer').fadeOut();
-            //            $('div#photoDetail').show();
             $('div#photopageContainer, div#photoDetail').addClass('photoDetailShowing');
 
             //empty first
@@ -62,23 +59,6 @@ var photoView = (function () {
                     imgContainer.children('img.photoDetailImg').removeClass('loading');
                     imgContainer.children('.sk-fading-circle').remove();
                 });
-
-
-            //            //---------------------------------------
-            //            //empty first
-            //            $('div#photoDetailModal .modal-body').empty();
-            //
-            //            //append new content
-            //            $('div#photoDetailModal .modal-body').append(
-            //                jQuery('<img/>', {
-            //                    class: 'photoDetailImg',
-            //                    src: photometa.url_o,
-            //                })
-            //            );
-            //
-            //            $('#photoDetailModal')
-            //                .modal('show');
-            //---------------------------------------
         })
         return photoview;
     }
@@ -90,7 +70,6 @@ var photoView = (function () {
             }).prependTo(target)
         }
 
-        //        if (!$(target).hasClass('masonryInited')) {
         var $masonry = $(target).masonry({
             // options
             itemSelector: '.photoBlockImg',
@@ -102,8 +81,6 @@ var photoView = (function () {
             $masonry.masonry('layout');
             $('img.photoBlockImg.loading').removeClass('loading');
         });
-        //            $(target).addClass('masonryInited');
-        //        }
     }
 
     function photoPageConstruct(photosArr) {
