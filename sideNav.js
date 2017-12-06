@@ -25,6 +25,9 @@ var nav = (function () {
 
             $('div.sideNavItem').removeClass('clicking').hide();
             target.addClass('clicking').fadeIn(300);
+            
+            $('div.sideNavOption').removeClass("selected")
+            $(this).addClass("selected");
         })
     }
 

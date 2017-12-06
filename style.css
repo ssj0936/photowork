@@ -15,8 +15,11 @@ div#mainPageContainer {
 
 
 div#sideNav #logoContainer {
+    width: 60%;
     display: flex;
     justify-content: center;
+    /* justify-self: center; */
+    align-self: center;
 }
 
 div#sideNav #logo {
@@ -25,25 +28,37 @@ div#sideNav #logo {
 }
 
 div#sideNav #sideNavOptionContainer {
-    padding-top: 1em;
+    width: 60%;
+    align-self: center;
+    margin: 20px 0px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
 }
 
 div#sideNav .sideNavOption {
+    font-style: normal;
+    line-height: 1.8em;
+    text-transform: none;
+    letter-spacing: 0em;
+    font-size: 16px;
     width: fit-content;
     font-size: medium;
-    font-weight: 200;
-    line-height: 2;
-    padding: 2px 0;
+    font-weight: 300;
+    padding: 1px 10px;
     cursor: pointer;
-    transition: background-color .5s, color .5s;
+    margin: 1px 0px;
+    transition: color .5s;
+    border-radius: 2px;
 }
 
-div#sideNav .sideNavOption:hover {
-    background-color: #CFDADC;
-    color: #4B5C66;
+div#sideNav .sideNavOption.selected {
+    color: #FF5456;
+}
+
+div#sideNav .sideNavOption:not(.selected):hover {
+    /*    background-color: #CFDADC;*/
+    color: #FFF;
 }
 
 div#mainPage {
@@ -333,6 +348,31 @@ div#divWorks {
         width: fit-content;
     }
 
+    img.socialMediaIcon {
+        filter: invert(80%);
+        margin: 5px 8px 5px 0px;
+        transition: .5s;
+/*        cursor: pointer;*/
+    }
+    
+    img.socialMediaIcon:hover{
+        filter: invert(100%);
+    }
+
+    div#socialMediaContainer {
+        padding-left: 10px;
+        width: 60%;
+        align-self: center;
+        padding-top: 1em;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: left;
+    }
+
+    div.divider{
+        
+    }
+    
     @media screen and (min-width: 768px) and (max-width: 960px) {
         .masonrySizer,
         .photoBlockImg {
