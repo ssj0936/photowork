@@ -78,11 +78,11 @@ img.photoBlockImg.loading {
 }
 
 div.album {
-    margin-bottom: 2em;
+    margin-bottom: 15em;
 }
 
 div.albumContent {
-    border-top: 4px solid #CFDADC;
+    /*    border-top: 4px solid #CFDADC;*/
     padding-top: 5px;
 }
 
@@ -206,6 +206,12 @@ div#divWorks {
     display: flex;
 }
 
+div.albumTitle {
+    margin-left: 5px;
+    padding-left: 1em;
+    border-left: 8px solid #CFDADC;
+}
+
 /* side navibar style --- mobile*/
 
 @media screen and (max-width: 768px) {
@@ -223,17 +229,18 @@ div#divWorks {
         text-align: -webkit-auto;
     }
 
-    /*
+
     div#mainPageContainer {
         width: 100%;
         padding: 0 2em;
     }
-    
+
     .masonrySizer,
     .photoBlockImg {
         width: 100%;
     }
-*/
+
+    /*
     @media screen and (min-width: 0px) and (max-width: 520px) {
         div#mainPageContainer {
             width: 100%;
@@ -257,6 +264,7 @@ div#divWorks {
             width: 50%;
         }
     }
+*/
 }
 
 /* side navibar style --- desktop */
@@ -352,10 +360,10 @@ div#divWorks {
         filter: invert(80%);
         margin: 5px 8px 5px 0px;
         transition: .5s;
-/*        cursor: pointer;*/
+        /*        cursor: pointer;*/
     }
-    
-    img.socialMediaIcon:hover{
+
+    img.socialMediaIcon:hover {
         filter: invert(100%);
     }
 
@@ -369,10 +377,39 @@ div#divWorks {
         justify-content: left;
     }
 
-    div.divider{
-        
+    div.photoDetailBtnContainer {
+        top: 0;
+        left: 0;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        display: flex;
+    }
+
+    div.photoDetailBtn {
+        width: 15%;
+        height: 100%;
+        display: inline-block;
+    }
+
+    div.photoDetailBtn.centerBtn {
+        width: 70%;
+        height: 100%;
+        display: inline-block;
+    }
+
+    div#backToPhotoWall {
+        cursor: url(img/detail_cursor_icon/cursor_homepage.png), auto;
     }
     
+    div#prevPhoto {
+        cursor: url(img/detail_cursor_icon/cursor_prev.png), auto;
+    }
+    
+    div#nextPhoto {
+        cursor: url(img/detail_cursor_icon/cursor_next.png), auto;
+    }
+
     @media screen and (min-width: 768px) and (max-width: 960px) {
         .masonrySizer,
         .photoBlockImg {

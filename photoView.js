@@ -15,56 +15,55 @@ var photoView = (function () {
 
     function photoViewConstruct(photometa) {
         var id = photometa.id,
-            //            height = photometa.height,
-            //            width = photometa.width,
             ispublic = photometa.ispublic,
             title = photometa.title,
             url = photoGeter.getPhotoUrl(photometa, 'Medium 640');
 
-        //        let ratio = getPhotoLongestLength() / parseInt(width),
-        //            height_n = height * ratio,
-        //            width_n = width * ratio;
-
         var photoview = jQuery('<img/>', {
             class: 'photoBlockImg loading',
             src: url,
+            'data-id': id,
         })
 
         photoview.click(function () {
             if (isModile()) return;
 
-            //cache data
-            localStorage['photometa'] = JSON.stringify(photometa);
-
-            var isLandScape = $(this).width() > $(this).height();
-            $('div#photopageContainer, div#photoDetail').addClass('photoDetailShowing');
-
-            //empty first
-            $('div#photoDetail div#photoDetailImg, div#photoDetail div#photoDetailMeta').off().empty();
-
-            //append new content
-            let imgContainer = $('div#photoDetail div#photoDetailImg');
-
-            $('div#photoDetailImg').append(createLoadingAnimation());
-            imgContainer.append(
-                jQuery('<img/>', {
-                    class: 'photoDetailImg loading',
-                    src: photometa.url_o,
-                })
-            );
-
-            imgContainer.imagesLoaded()
-                .always(function () {
-                    console.log('img load finish');
-                    imgContainer.children('img.photoDetailImg').removeClass('loading');
-                    imgContainer.children('.sk-fading-circle').remove();
-                });
+            showDetailPhoto(photometa);
         })
         return photoview;
     }
 
+    function showDetailPhoto(photometa) {
+        //cache data
+        localStorage['photometa'] = JSON.stringify(photometa);
+
+        //            var isLandScape = $(this).width() > $(this).height();
+        $('div#photopageContainer, div#photoDetail').addClass('photoDetailShowing');
+
+        //empty first
+        let $image = $('div#photoDetail div#photoDetailImg img.photoDetailImg')
+        $image.attr('src', '');
+        $image.attr('id', '');
+
+        //append new content
+        let imgContainer = $('div#photoDetail div#photoDetailImg');
+
+        $image
+            .addClass('loading')
+            .attr('src', photometa.url_o)
+            .attr('id', photometa.id);;
+        imgContainer.append(createLoadingAnimation());
+        $image.imagesLoaded()
+            .always(function () {
+                console.log('img load finish');
+                imgContainer.children('img.photoDetailImg').removeClass('loading');
+                imgContainer.children('.sk-fading-circle').remove();
+            });
+
+    }
+
     function masonryfy(target) {
-        if (!$(target).first().hasClass('masonrySizer')) {
+        if ($(target).children('div.masonrySizer').length == 0) {
             jQuery('<div/>', {
                 class: 'masonrySizer'
             }).prependTo(target)
@@ -147,7 +146,7 @@ var photoView = (function () {
             firstLoadNum = lazyloader.getBookmarkCountPerLoad();
 
         let needToBreak = false,
-            photosArr = photoGeter.getPhoto();
+            photosArr = photoGeter.getPhotos();
         for (let photoset of photosArr) {
             if (photoset.allLoaded) continue;
 
@@ -207,5 +206,6 @@ var photoView = (function () {
         photoViewConstruct: photoViewConstruct,
         photoPageConstruct: photoPageConstruct,
         lazyloaderAction: lazyloaderAction,
+        showDetailPhoto:showDetailPhoto,
     }
 }())

@@ -38,8 +38,9 @@
                 <img id="logo" src="img/logo.png" alt="">
             </div>
             <div id="sideNavOptionContainer">
-                <div class="sideNavOption" data-target="divAboutMe"> AbouT Me </div>
                 <div class="sideNavOption selected" data-target="divWorks"> WorkS </div>
+                <div class="sideNavOption" data-target="divAboutMe"> AbouT Me </div>
+
                 <div class="sideNavOption" data-target="divContactMe"> ContacT Me </div>
             </div>
             <div class="divider"></div>
@@ -86,9 +87,19 @@
                         <span id="btnShowExif" class="functionbtn glyphicon glyphicon-info-sign"></span>
                         <span id="btnDownload" class="functionbtn glyphicon glyphicon-download"></span>
                     </div>
-                    <!--                   <button class="floating-btn is--off" id="sub-scrn-btn"></button>-->
-                    <div id="photoDetailImg"></div>
-                    <!--                    <div id="photoDetailMeta"></div>-->
+                    <div id="photoDetailImg">
+                        <div class="photoDetailBtnContainer">
+                            <!--
+                           <div class="photoDetailBtn" id="prevPhoto" title="Previous Photo"></div>
+<div class="photoDetailBtn centerBtn" id="backToPhotoWall" title="back To Photo Wall"></div>
+<div class="photoDetailBtn" id="nextPhoto" title="Next Photo"></div>
+-->
+                            <div class="photoDetailBtn" id="prevPhoto"></div>
+                            <div class="photoDetailBtn centerBtn" id="backToPhotoWall"></div>
+                            <div class="photoDetailBtn" id="nextPhoto"></div>
+                        </div>
+                        <img class="photoDetailImg">
+                    </div>
                 </div>
             </div>
             <div id="divContactMe" class="sideNavItem" style="display: none">
@@ -105,6 +116,10 @@
                 photoView.photoPageConstruct(photosArr)
             }
         );
+        
+        photoDetail.clickListenerSetting();
+
+
 
     </script>
 </body>

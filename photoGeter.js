@@ -75,8 +75,8 @@ var photoGeter = (function () {
                                 for (let photo of photosetjsonObj.photoset.photo) {
                                     photosetObj.photos.push({
                                         id: photo.id,
-//                                        height: photo.height_o,
-//                                        width: photo.width_o,
+                                        //                                        height: photo.height_o,
+                                        //                                        width: photo.width_o,
                                         ispublic: photo.ispublic,
                                         title: photo.title,
                                         farm: photo.farm,
@@ -130,14 +130,57 @@ var photoGeter = (function () {
         return JSON.parse(text);
     }
 
-    function getPhoto() {
+    function getPhotos() {
         return photosArr;
+    }
+
+    function getPhoto(id) {
+        for (var album of photosArr) {
+            for (var photo of album.photos) {
+                if (photo.id == '' + id) {
+                    return photo;
+                }
+            }
+        }
+        return null;
+    }
+    
+    function getNextPhoto(id) {
+        let found = false;
+        for (var album of photosArr) {
+            for (var photo of album.photos) {
+                if(found){
+                    return photo;
+                }
+                
+                if (photo.id == '' + id) {
+                    found = true;
+                }
+            }
+        }
+        return null;
+    }
+    
+    function getPrevPhoto(id) {
+        let prev = null;
+        for (var album of photosArr) {
+            for (var photo of album.photos) {
+                if (photo.id == '' + id) {
+                    return prev;
+                }
+                prev = photo;
+            }
+        }
+        return null;
     }
 
     return {
         getExif: getExif,
         getPhotoUrl: getPhotoUrl,
         fetchPhoto: fetchPhoto,
+        getPhotos: getPhotos,
         getPhoto: getPhoto,
+        getNextPhoto:getNextPhoto,
+        getPrevPhoto:getPrevPhoto,
     }
 }());
