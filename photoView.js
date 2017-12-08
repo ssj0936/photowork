@@ -27,7 +27,6 @@ var photoView = (function () {
 
         photoview.click(function () {
             if (isModile()) return;
-
             showDetailPhoto(photometa);
         })
         return photoview;
@@ -60,6 +59,7 @@ var photoView = (function () {
                 imgContainer.children('.sk-fading-circle').remove();
             });
 
+        $('div#photoDetail').css('top',lazyloader.getCurrentScrollTop());
     }
 
     function masonryfy(target) {
@@ -77,8 +77,9 @@ var photoView = (function () {
         });
 
         $masonry.imagesLoaded().always(function () {
-            $masonry.masonry('layout');
             $('img.photoBlockImg.loading').removeClass('loading');
+            $masonry.masonry('layout');
+//            $('img.photoBlockImg.loading').removeClass('loading');
         });
     }
 

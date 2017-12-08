@@ -100,10 +100,11 @@ div#photoDetail {
 }
 
 div#photoDetail.photoDetailShowing {
-    position: fixed;
+    position: absolute;
     display: flex;
-    top: 0px;
+    /* top: 0px; */
     opacity: 1;
+    width: inherit;
 }
 
 img.photoDetailImg {
@@ -156,7 +157,7 @@ div#infoButton {
     /* display: flex; */
     /*    min-width: 0px;*/
     /*    opacity: 0;*/
-    position: fixed;
+    position: absolute;
     height: 100vh;
     overflow: hidden;
     flex-direction: column;
@@ -204,6 +205,8 @@ div#photopageContainer.photoDetailShowing {
 
 div#divWorks {
     display: flex;
+    position: relative;
+    width: 100%;
 }
 
 div.albumTitle {
@@ -275,7 +278,8 @@ div.albumTitle {
     }
 
     div#sideNav {
-        position: fixed;
+        /*        position: fixed;*/
+        top: 0;
         padding-top: 40px;
         display: flex;
         flex-direction: column;
@@ -336,9 +340,13 @@ div.albumTitle {
         text-align: -webkit-auto;
     }
     div#mainPage {
-        margin-left: 280px;
-        /*        padding: 20px;*/
+        /*margin-left: 280px; */
+        /* padding: 20px; */
         color: #4B5C66;
+        overflow: auto;
+        position: relative;
+        /* width: 100%; */
+        height: 100vh;
     }
 
     div#mainPageContainer {
@@ -401,11 +409,11 @@ div.albumTitle {
     div#backToPhotoWall {
         cursor: url(img/detail_cursor_icon/cursor_homepage.png), auto;
     }
-    
+
     div#prevPhoto {
         cursor: url(img/detail_cursor_icon/cursor_prev.png), auto;
     }
-    
+
     div#nextPhoto {
         cursor: url(img/detail_cursor_icon/cursor_next.png), auto;
     }
