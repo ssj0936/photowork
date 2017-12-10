@@ -2,19 +2,12 @@ var lazyloader = (function () {
     var homepageBMNumFirstTime = 40,
         homepageBMNumPerload = 20;
 
-    var LAST_SCROLL_TOP = 0,
-        CURRENT_SCROLL_TOP = 0;
+    var LAST_SCROLL_TOP = 0;
 
     function lazyloaderSetup(callback) {
         var $container = $('#mainPage'),
             container = document.getElementById('mainPage');
-        $container.scroll(function () {
-            
-            //photo Detail Scrolling setting
-            CURRENT_SCROLL_TOP = $container.scrollTop();
-//            if($('div#photoDetail.photoDetailShowing').length != 0)
-//                $('div#photoDetail.photoDetailShowing').css('top',CURRENT_SCROLL_TOP);
-            
+        $container.scroll(function () {            
             //lazyloader setting
             if (!$('div#photopageContainer').is(':visible')) return;
 
@@ -49,15 +42,10 @@ var lazyloader = (function () {
         return LAST_SCROLL_TOP;
     }
 
-    function getCurrentScrollTop() {
-        return CURRENT_SCROLL_TOP;
-    }
-
     return {
         lazyloaderSetup: lazyloaderSetup,
         getFirstBookmarkLoadCount: getFirstBookmarkLoadCount,
         getBookmarkCountPerLoad: getBookmarkCountPerLoad,
         getLastScrollTop: getLastScrollTop,
-        getCurrentScrollTop: getCurrentScrollTop,
     }
 }());

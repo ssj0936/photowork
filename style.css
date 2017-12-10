@@ -88,7 +88,11 @@ div.albumContent {
 
 div#divAboutMe,
 div#divContactMe {
-    height: -webkit-fill-available;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    min-height: -webkit-fill-available;
+    background-color: #E4E1DE;
 }
 
 div#photoDetail {
@@ -99,12 +103,49 @@ div#photoDetail {
     transition: opacity .5s;
 }
 
-div#photoDetail.photoDetailShowing {
-    position: absolute;
+div#divAboutMe img.myface {
+    flex: 0 1 250px;
+    align-self: center;
+    justify-self: center;
+    border: 10px solid #f1f1f1;
+}
+
+div.myfaceContainer {
+    text-align: center;
+}
+
+div#divAboutMe div#aboutMeContainer {
+    flex: 1 1 auto;
+    margin: 20px 40px;
     display: flex;
-    /* top: 0px; */
-    opacity: 1;
-    width: inherit;
+    flex-direction: column;
+}
+
+p.aboutMeTitle {
+    font-family: arial;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1.2em;
+    text-transform: none;
+    letter-spacing: .01em;
+    margin: 1em 0;
+    font-size: 35px;
+    text-align: center;
+}
+
+div.aboutMeContentContainer {
+    padding: 0px 100px;
+}
+
+p.aboutMeContent {
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.8em;
+    text-transform: none;
+    letter-spacing: .02em;
+    font-size: inherit;
+    margin: 0 0 1em;
+    text-align: left;
 }
 
 img.photoDetailImg {
@@ -113,6 +154,10 @@ img.photoDetailImg {
     object-fit: contain;
     transition: opacity .5s;
     opacity: 1;
+}
+
+img.aboutmeIcon {
+    margin: 0px 3px;
 }
 
 .loading {
@@ -192,15 +237,21 @@ span.functionbtn:hover {
     opacity: .5;
 }
 
+img.functionbtn {
+    margin: 5px;
+    cursor: pointer;
+    opacity: .8;
+    transition: opacity .5s;
+}
+
+img.functionbtn:hover {
+    opacity: .5;
+}
+
 div#photopageContainer {
     flex: 1 1 auto;
     padding: 20px;
     transition: -webkit-filter .5s, opacity .5s;
-}
-
-div#photopageContainer.photoDetailShowing {
-    opacity: .3;
-    -webkit-filter: grayscale(100%);
 }
 
 div#divWorks {
@@ -213,6 +264,24 @@ div.albumTitle {
     margin-left: 5px;
     padding-left: 1em;
     border-left: 8px solid #CFDADC;
+}
+
+div.aboutMeLinkContainer a {
+    text-decoration: none;
+    transition: opacity .5s;
+}
+
+div.aboutMeLinkContainer a:hover {
+    opacity: .7;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 /* side navibar style --- mobile*/
@@ -416,6 +485,19 @@ div.albumTitle {
 
     div#nextPhoto {
         cursor: url(img/detail_cursor_icon/cursor_next.png), auto;
+    }
+
+    div#photopageContainer.photoDetailShowing {
+        opacity: .3;
+        -webkit-filter: grayscale(100%);
+    }
+
+    div#photoDetail.photoDetailShowing {
+        position: absolute;
+        display: flex;
+        /* top: 0px; */
+        opacity: 1;
+        width: inherit;
     }
 
     @media screen and (min-width: 768px) and (max-width: 960px) {

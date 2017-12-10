@@ -59,7 +59,7 @@ var photoView = (function () {
                 imgContainer.children('.sk-fading-circle').remove();
             });
 
-        $('div#photoDetail').css('top',lazyloader.getCurrentScrollTop());
+        $('div#photoDetail').css('top',photoDetail.getCurrentScrollTop());
     }
 
     function masonryfy(target) {

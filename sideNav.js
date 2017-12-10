@@ -1,9 +1,3 @@
-$(document).ready(function () {
-    nav.sideNavSetting();
-    nav.infoButtonSetting();
-});
-
-
 var nav = (function () {
     var EXIF_ATTR_CREATOR_TOO = 'CreatorTool',
         EXIF_ATTR_EXPOSURE_TIME = 'ExposureTime',
@@ -25,33 +19,28 @@ var nav = (function () {
 
             $('div.sideNavItem').removeClass('clicking').hide();
             target.addClass('clicking').fadeIn(300);
-            
+
             $('div.sideNavOption').removeClass("selected")
             $(this).addClass("selected");
         })
     }
 
     function infoButtonSetting() {
-        $('span.functionbtn').click(function () {
+        $('span.functionbtn,img.functionbtn').click(function () {
             switch ($(this).attr('id')) {
                 case 'btnBackToPhotoWall':
                     //remove photo detail
                     $('div#photopageContainer, div#photoDetail').removeClass('photoDetailShowing');
-                    
+
                     //collapse exif container
                     $('div#exifInfoSection').removeClass('showing');
                     var exifContainer = $('div#exifInfoDetail');
                     exifContainer.empty();
-                    
+
                     console.log('btnBackToPhotoWall');
                     break;
                 case 'btnShowExif':
-                    var photometa = JSON.parse(localStorage['photometa']);
-
-                    photoGeter.getExif(photometa, function (exif) {
-                        console.log(exif);
-                        exifDataViewConstruct(exif);
-                    })
+                    exifDataViewShow();
 
                     //expend exif container
                     $('div#exifInfoSection').addClass('showing');
@@ -71,7 +60,7 @@ var nav = (function () {
                 case 'btnCloseExifInfo':
                     //remove photo detail
                     $('div#photopageContainer, div#photoDetail').removeClass('photoDetailShowing');
-                    
+
                     //collapse exif container
                     $('div#exifInfoSection').removeClass('showing');
                     var exifContainer = $('div#exifInfoDetail');
@@ -90,23 +79,34 @@ var nav = (function () {
         })
     }
 
-    function exifDataViewConstruct(exif) {
+    function exifDataViewShow() {
+        var photometa = JSON.parse(localStorage['photometa']);
+
         var exifContainer = $('div#exifInfoDetail');
         exifContainer.empty();
 
+        photoGeter.getExif(photometa, function (exif) {
+            console.log(exif);
+            exifDataViewConstruct(exif);
+        });
+    }
+
+    function exifDataViewConstruct(exif) {
+        var exifContainer = $('div#exifInfoDetail');
+        exifContainer.hide();
         for (let index in exifAttr) {
             let data = exif[exifAttr[index]],
                 displayName = exifAttrDisplayName[index];
 
             if (typeof data == 'undefined' || data == '') continue;
 
-            if(displayName == EXIF_ATTR_FNUMBER)
-                data = 'f/'+data;
-            else if(displayName == EXIF_ATTR_ISO)
-                data = 'ISO '+data;
-            else if(displayName == EXIF_ATTR_EXPOSURE_TIME)
-                data = data+' Sec';
-               
+            if (displayName == EXIF_ATTR_FNUMBER)
+                data = 'f/' + data;
+            else if (displayName == EXIF_ATTR_ISO)
+                data = 'ISO ' + data;
+            else if (displayName == EXIF_ATTR_EXPOSURE_TIME)
+                data = data + ' Sec';
+
             jQuery('<div/>', {
                     class: 'exifDataContainer'
                 })
@@ -133,9 +133,9 @@ var nav = (function () {
                 )
                 .appendTo(exifContainer)
         }
-        
+
         //no basic exif data
-        if(exifContainer.children().length == 0){
+        if (exifContainer.children().length == 0) {
             jQuery('<div/>', {
                     class: 'exifDataContainer'
                 })
@@ -161,9 +161,11 @@ var nav = (function () {
                 )
                 .appendTo(exifContainer)
         }
+        exifContainer.fadeIn(500);
     }
 
     return {
+        exifDataViewShow: exifDataViewShow,
         infoButtonSetting: infoButtonSetting,
         sideNavSetting: sideNavSetting,
     }

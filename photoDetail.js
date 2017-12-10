@@ -1,7 +1,13 @@
 var photoDetail = (function () {
+
+    var CURRENT_SCROLL_TOP = 0;
+
     function photoDetailRepositionListener() {
         var $container = $('#mainPage');
         $container.scroll(function () {
+            //photo Detail Scrolling setting
+            CURRENT_SCROLL_TOP = $container.scrollTop();
+
             //photo Detail Scrolling setting
             var currentScrollTop = $container.scrollTop();
             if ($('div#photoDetail.photoDetailShowing').length != 0)
@@ -31,7 +37,7 @@ var photoDetail = (function () {
                 case 'backToPhotoWall':
                     //remove photo detail
                     $('div#photopageContainer, div#photoDetail').removeClass('photoDetailShowing');
-                    
+
                     //collapse exif container
                     $('div#exifInfoSection').removeClass('showing');
                     var exifContainer = $('div#exifInfoDetail');
@@ -45,6 +51,10 @@ var photoDetail = (function () {
                     if (photoGeter.getNextPhoto(id) != null) {
                         console.log(photoGeter.getNextPhoto(id));
                         photoView.showDetailPhoto(photoGeter.getNextPhoto(id));
+                        
+                        if($('div#exifInfoSection').hasClass('showing')){
+                            nav.exifDataViewShow();
+                        }
                     } else {
                         console.log('Last Photo');
                     }
@@ -57,8 +67,13 @@ var photoDetail = (function () {
         })
     }
 
+    function getCurrentScrollTop() {
+        return CURRENT_SCROLL_TOP;
+    }
+
     return {
         clickListenerSetting: clickListenerSetting,
-        photoDetailRepositionListener:photoDetailRepositionListener,
+        photoDetailRepositionListener: photoDetailRepositionListener,
+        getCurrentScrollTop: getCurrentScrollTop,
     }
 }());
