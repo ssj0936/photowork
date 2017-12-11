@@ -133,10 +133,16 @@ p.aboutMeTitle {
     text-align: center;
 }
 
+.aboutMeSubtitle {
+    border-bottom: 2px solid #FFF;
+    padding-bottom: 5px;
+}
+
 div.aboutMeContentContainer {
     padding: 0px 100px;
 }
 
+div.aboutMeContent,
 p.aboutMeContent {
     font-weight: 400;
     font-style: normal;
@@ -146,6 +152,10 @@ p.aboutMeContent {
     font-size: inherit;
     margin: 0 0 1em;
     text-align: left;
+}
+
+div.aboutMeContent li {
+    list-style-type: none;
 }
 
 img.photoDetailImg {
@@ -158,6 +168,14 @@ img.photoDetailImg {
 
 img.aboutmeIcon {
     margin: 0px 3px;
+}
+
+.aboutMeBlock {
+    margin-bottom: 2em;
+}
+
+a.aboutMeMailTo {
+    color: inherit;
 }
 
 .loading {
@@ -265,7 +283,9 @@ div.albumTitle {
     padding-left: 1em;
     border-left: 8px solid #CFDADC;
 }
-
+div.aboutMeLinkContainer{
+    margin-bottom: 2em;
+}
 div.aboutMeLinkContainer a {
     text-decoration: none;
     transition: opacity .5s;
@@ -304,7 +324,7 @@ div.aboutMeLinkContainer a:hover {
 
     div#mainPageContainer {
         width: 100%;
-        padding: 0 2em;
+        padding-top: 50px;
     }
 
     .masonrySizer,
@@ -312,31 +332,43 @@ div.aboutMeLinkContainer a:hover {
         width: 100%;
     }
 
-    /*
-    @media screen and (min-width: 0px) and (max-width: 520px) {
-        div#mainPageContainer {
-            width: 100%;
-            padding: 0 2em;
-        }
-
-        .masonrySizer,
-        .photoBlockImg {
-            width: 100%;
-        }
+    .navbar-default.navbar {
+        margin-bottom: 0;
+        background-color: #4B5C66;
+        color: #CFDADC;
+        z-index: 9999;
+        border: 0;
+        font-size: 12px !important;
+        line-height: 1.42857143 !important;
+        border-radius: 0;
     }
 
-    @media screen and (min-width: 520px) and (max-width: 768px) {
-        div#mainPageContainer {
-            width: 100%;
-            padding: 0 2em;
-        }
-
-        .masonrySizer,
-        .photoBlockImg {
-            width: 50%;
-        }
+    .navbar-default .navbar-toggle span.icon-bar {
+        background-color: #CFDADC;
     }
-*/
+
+    .navbar-default a.navbar-brand {
+        color: #CFDADC;
+    }
+
+    .navbar-default ul.navbar-nav > li > a {
+        color: #CFDADC;
+        transition: .5s color;
+    }
+
+    .navbar-nav li a:hover,
+    .navbar-nav li.active a {
+        color: #FF5456 !important;
+    }
+
+    .navbar-default .navbar-toggle {
+        border-color: transparent;
+        color: #CFDADC !important;
+    }
+
+    div.aboutMeContentContainer {
+        padding: 0px 30px;
+    }
 }
 
 /* side navibar style --- desktop */
@@ -344,6 +376,10 @@ div.aboutMeLinkContainer a:hover {
 @media screen and (min-width: 769px) {
     img.photoBlockImg:hover {
         opacity: 0.5;
+    }
+
+    .navbar {
+        display: none;
     }
 
     div#sideNav {
@@ -521,12 +557,13 @@ div.aboutMeLinkContainer a:hover {
         }
     }
 
-    @media screen and (min-width: 1440px) and (max-width: 1600px) {
+    @media screen and (min-width: 1440px) {
         .masonrySizer,
         .photoBlockImg {
             width: 25%;
         }
     }
+    /*
 
     @media screen and (min-width: 1600px) {
         .masonrySizer,
@@ -534,6 +571,7 @@ div.aboutMeLinkContainer a:hover {
             width: 20%;
         }
     }
+*/
 }
 
 /*loading animation*/

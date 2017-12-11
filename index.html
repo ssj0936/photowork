@@ -22,6 +22,25 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="" style="display: inline-block">Timothy's Studio
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 0">
+                <li><a class="navOption" href="#about" data-target="divWorks">WorkS</a></li>
+                <li><a class="navOption" href="#services" data-target="divAboutMe">AbouT Me</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div id="photoDetailModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
@@ -41,7 +60,7 @@
                 <div class="sideNavOption selected" data-target="divWorks"> WorkS </div>
                 <div class="sideNavOption" data-target="divAboutMe"> AbouT Me </div>
 
-<!--                <div class="sideNavOption" data-target="divContactMe"> ContacT Me </div>-->
+                <!--                <div class="sideNavOption" data-target="divContactMe"> ContacT Me </div>-->
             </div>
             <div class="divider"></div>
             <div id="socialMediaContainer">
@@ -76,63 +95,67 @@
             <div id="divAboutMe" class="sideNavItem" style="display: none">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-12 myfaceContainer">
-                            <img src="img/myface.jpg" class="img-circle myface" width="255" height="255">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <p class="aboutMeTitle">Timothy Chung</p>
-                        </div>
-                    </div>
-
-                    <div class="row aboutMeContentContainer">
                         <div class="col-lg-2"></div>
-                        <div class="col-lg-3">
-                            <h3>About Me</h3>
-                            <p class="aboutMeContent">
-                                <b>Timothy Chung</b>(born 1989), Taiwanese, who is a Android app developer but fall in love to Web front-end. Also a hobbyist photographer. Love traveling with camera and tripod capturing scenery, and recording life by iphone camera. Recently addicting to street snap, old school tatoo, and Nintendo Switch.
-                            </p>
-                        </div>
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col-lg-12 myfaceContainer">
+                                    <img src="img/myface.jpg" class="img-circle myface" width="255" height="255">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p class="aboutMeTitle">Timothy Chung</p>
+                                </div>
+                            </div>
 
-                        <div class="col-lg-3">
-                            <h3>My Photography Gear</h3>
-                            <p class="aboutMeContent">
-                                <li>Nikon P7700</li>
-                                <li>ROWA Viltrox Wide Lens 0.7x 58mm</li>
-                                <li>Iphone 6S</li>
-                                <li>And PhotoShop CC 2017</li>
-                            </p>
-                        </div>
+                            <div class="row aboutMeContentContainer">
+                                <div class="col-lg-4 aboutMeBlock">
+                                    <h3 class="aboutMeSubtitle">About Me</h3>
+                                    <p class="aboutMeContent">
+                                        <b>Timothy Chung</b>(born 1989), Taiwanese, who is a Android app developer but fall in love to Web front-end. Also a hobbyist photographer. Love traveling with camera and tripod capturing scenery, and recording life by iphone camera. Recently addicting to street snap, old school tatoo, and cocktail.
+                                    </p>
+                                </div>
 
-                        <div class="col-lg-3">
-                            <h3>Contact Me</h3>
-                            <p class="aboutMeContent noselect">
-                                tim77813@gmail.com
-                            </p>
-                        </div>
-                        <div class="col-lg-1"></div>
-                    </div>
+                                <div class="col-lg-4 aboutMeBlock">
+                                    <h3 class="aboutMeSubtitle">My Gear</h3>
+                                    <div class="aboutMeContent">
+                                        <li>Nikon P7700</li>
+                                        <li>ROWA Viltrox Wide Lens 0.7x 58mm</li>
+                                        <li>Iphone 6S</li>
+                                        <li>And PhotoShop CC 2017</li>
+                                    </div>
+                                </div>
 
-                    <div class="row aboutMeContentContainer" style="margin-top: 20px">
-                        <div class="col-lg-12" style="text-align: center">
-                            <div class="aboutMeLinkContainer">
-                                <a href="https://www.facebook.com/ssj0936" target="_blank">
+                                <div class="col-lg-4 aboutMeBlock">
+                                    <h3 class="aboutMeSubtitle">Contact Me</h3>
+                                    <p class="aboutMeContent noselect">
+                                        <a class="aboutMeMailTo" href="mailto:tim77813@gmail.com">tim77813@gmail.com</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row aboutMeContentContainer" style="margin-top: 20px">
+                                <div class="col-lg-12" style="text-align: center">
+                                    <div class="aboutMeLinkContainer">
+                                        <a href="https://www.facebook.com/ssj0936" target="_blank">
                                     <img class="aboutmeIcon" src="img/about_me_icon/icon_facebook.svg" width="28" height="28">
                                 </a>
-                                <a href="https://www.instagram.com/ssj0936" target="_blank">
+                                        <a href="https://www.instagram.com/ssj0936" target="_blank">
                                     <img class="aboutmeIcon" src="img/about_me_icon/icon_instagram.svg" width="28" height="28">
                                 </a>
-                                <a href="https://github.com/ssj0936" target="_blank">
+                                        <a href="https://github.com/ssj0936" target="_blank">
                                     <img class="aboutmeIcon" src="img/about_me_icon/icon_github.svg" width="28" height="28">
                                 </a>
-                                <a href="https://www.flickr.com/photos/27389068@N08/albums" target="_blank">
+                                        <a href="https://www.flickr.com/photos/27389068@N08/albums" target="_blank">
                                     <img class="aboutmeIcon" src="img/about_me_icon/icon_flickr.svg" width="28" height="28">
                                 </a>
 
-                                <!--                                <img class="aboutmeIcon" src="img/about_me_icon/icon_linkedin.svg" width="28" height="28">-->
-                                <!--                                <img class="aboutmeIcon" src="img/about_me_icon/icon_pinterest.svg" width="28" height="28">-->
+                                        <!--                                <img class="aboutmeIcon" src="img/about_me_icon/icon_linkedin.svg" width="28" height="28">-->
+                                        <!--                                <img class="aboutmeIcon" src="img/about_me_icon/icon_pinterest.svg" width="28" height="28">-->
+                                    </div>
+                                </div>
                             </div>
+                            <div class="col-lg-2"></div>
                         </div>
                     </div>
                 </div>
@@ -158,7 +181,7 @@
                     </div>
                 </div>
             </div>
-<!--
+            <!--
             <div id="divContactMe" class="sideNavItem" style="display: none">
                 <div id="ContactMeContainer">
                     <p>ContacT Me</p>

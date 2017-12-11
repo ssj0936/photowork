@@ -11,7 +11,7 @@ var nav = (function () {
         exifAttrDisplayName = ['Camera' /*, 'CreatorTool'*/ , 'ExposureTime', 'FNumber', 'Flash', 'FocalLength', 'ISO'];
 
     function sideNavSetting() {
-        $('div.sideNavOption').click(function () {
+        $('div.sideNavOption, nav a.navOption').click(function () {
             console.log('click');
             let target = $('#' + $(this).attr('data-target'));
 
@@ -21,8 +21,12 @@ var nav = (function () {
             target.addClass('clicking').fadeIn(300);
 
             $('div.sideNavOption').removeClass("selected")
-            $(this).addClass("selected");
-        })
+            $('[data-target="'+$(this).attr('data-target')+'"]').addClass("selected");
+        });
+
+        $('.nav a').on('click', function () {
+            $('.navbar-toggle').click() //bootstrap 3.x by Richard
+        });
     }
 
     function infoButtonSetting() {
