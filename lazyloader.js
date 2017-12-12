@@ -7,19 +7,35 @@ var lazyloader = (function () {
     function lazyloaderSetup(callback) {
         var $container = $('#mainPage'),
             container = document.getElementById('mainPage');
-        $container.scroll(function () {            
-            //lazyloader setting
-            if (!$('div#photopageContainer').is(':visible')) return;
+        //        $container.scroll(function () {
+        //            _onScroll(container,callback)
+        //        });
 
-            if (isDownScrolling()) {
-                if (isScrollToBottomTrigger()) {
-                    if (callback) {
-                        callback();
-                    }
+        $container
+            .on('scroll', function () {
+                _onScroll(callback);
+            });
+
+        $(document.body).on('touchmove', function () {
+            _onScroll(callback);
+        }); // for mobile
+    }
+
+    function _onScroll(callback) {
+        if (!$('div#photopageContainer').is(':visible')) return;
+
+        var container = (isModile()) ? (document.body) : document.getElementById('mainPage'),
+            $container = (isModile()) ? $(window) : $('#mainPage') ;
+
+
+        if (isDownScrolling()) {
+            if (isScrollToBottomTrigger()) {
+                if (callback) {
+                    callback();
                 }
             }
-            LAST_SCROLL_TOP = $(this).scrollTop();
-        });
+        }
+        LAST_SCROLL_TOP = $container.scrollTop();
 
         function isDownScrolling() {
             return ($container.scrollTop() > LAST_SCROLL_TOP);
