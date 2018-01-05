@@ -19,12 +19,19 @@ var photoDetail = (function () {
         $('.photoDetailBtn').click(function () {
             switch (this.getAttribute('id')) {
                 case 'prevPhoto':
-                    var id = $('div#photoDetail div#photoDetailImg img.photoDetailImg').attr('id');
+                    var id = $('div#photoDetail div#photoDetailImg img.photoDetailImg').last().attr('id');
+
                     //                    console.log(photoGeter.getPhoto(id));
                     //                    console.log(photoGeter.getPrevPhoto(id));
                     if (photoGeter.getPrevPhoto(id) != null) {
-                        console.log(photoGeter.getPrevPhoto(id));
+                        $('div#photoDetail div#photoDetailImg img.photoDetailImg').addClass('photodetailSlideRight');
+//                        console.log(photoGeter.getPrevPhoto(id));
+                        photoView.imgPreload(photoGeter.getPrevPhoto(id));
                         photoView.showDetailPhoto(photoGeter.getPrevPhoto(id));
+                        
+                        if ($('div#exifInfoSection').hasClass('showing')) {
+                            nav.exifDataViewShow();
+                        }
                     } else {
                         console.log('First Photo');
                     }
@@ -35,6 +42,9 @@ var photoDetail = (function () {
                     console.log('prevPhoto');
                     break;
                 case 'backToPhotoWall':
+                    //remove photo
+                    $('div#photoDetail div#photoDetailImg img.photoDetailImg').remove();
+
                     //remove photo detail
                     $('div#photopageContainer, div#photoDetail').removeClass('photoDetailShowing');
 
@@ -45,14 +55,17 @@ var photoDetail = (function () {
                     console.log('backToPhotoWall');
                     break;
                 case 'nextPhoto':
-                    var id = $('div#photoDetail div#photoDetailImg img.photoDetailImg').attr('id');
+                    var id = $('div#photoDetail div#photoDetailImg img.photoDetailImg').last().attr('id');
                     //                    console.log(photoGeter.getPhoto(id));
                     //                    console.log(photoGeter.getNextPhoto(id));
                     if (photoGeter.getNextPhoto(id) != null) {
-                        console.log(photoGeter.getNextPhoto(id));
+                        $('div#photoDetail div#photoDetailImg img.photoDetailImg').addClass('photodetailSlideLeft');
+
+//                        console.log(photoGeter.getNextPhoto(id));
+                        photoView.imgPreload(photoGeter.getNextPhoto(id));
                         photoView.showDetailPhoto(photoGeter.getNextPhoto(id));
-                        
-                        if($('div#exifInfoSection').hasClass('showing')){
+
+                        if ($('div#exifInfoSection').hasClass('showing')) {
                             nav.exifDataViewShow();
                         }
                     } else {
