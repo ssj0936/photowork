@@ -374,7 +374,7 @@ div.aboutMeLinkContainer a:hover {
 /* side navibar style --- desktop */
 
 @media screen and (min-width: 769px) {
-    img.photoBlockImg:hover {
+    img.photoBlockImg:not(.loading):hover {
         opacity: 0.5;
     }
 

@@ -75,11 +75,10 @@ var photoView = (function () {
             columnWidth: '.masonrySizer',
             percentPosition: true,
         });
-
+        
         $masonry.imagesLoaded().always(function () {
-            $('img.photoBlockImg.loading').removeClass('loading');
+            $(target).children('img.photoBlockImg.loading').removeClass('loading');
             $masonry.masonry('layout');
-//            $('img.photoBlockImg.loading').removeClass('loading');
         });
     }
 
@@ -131,6 +130,7 @@ var photoView = (function () {
             if (needToBreak) break;
 
             photoset.allLoaded = true;
+            container.addClass('allLoaded');
         }
         $('.masonryObject').each(function () {
             masonryfy(this);
@@ -196,6 +196,7 @@ var photoView = (function () {
             }
             if (needToBreak) break;
             photoset.allLoaded = true;
+            container.addClass('allLoaded');
         }
         $('.masonryObject').not('.masonryInited').each(function () {
             masonryfy(this);
