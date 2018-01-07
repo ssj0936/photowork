@@ -131,7 +131,8 @@ var photoView = (function () {
                             jQuery('<h3/>').text(photoset.title)
                         )
                     )
-                    .appendTo("div#photopageContainer");
+//                    .prependTo("div#photopageContainer .spinner");
+                    .appendTo("div#photopageContainer div.photopageContainer");
                 container = jQuery('<div/>', {
                     class: 'albumContent masonryObject',
                 }).appendTo(album);
@@ -197,7 +198,7 @@ var photoView = (function () {
                             jQuery('<h3/>').text(photoset.title)
                         )
                     )
-                    .appendTo("div#photopageContainer");
+                    .appendTo("div#photopageContainer div.photopageContainer");
                 container = jQuery('<div/>', {
                     class: 'albumContent masonryObject',
                 }).appendTo(album);

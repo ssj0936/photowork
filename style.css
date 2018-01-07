@@ -78,7 +78,7 @@ img.photoBlockImg.loading {
 }
 
 div.album {
-    margin-bottom: 15em;
+    /*    margin-bottom: 15em;*/
 }
 
 div.albumContent {
@@ -760,21 +760,22 @@ div.aboutMeLinkContainer a:hover {
 /*loading*/
 
 .spinner {
-    position: absolute;
+    /*    position: absolute;*/
     width: 50px;
     height: 40px;
     text-align: center;
     font-size: 10px;
     z-index: 9999;
-    bottom: 200px;
+    bottom: 0;
     left: 0;
     right: 0;
     margin: 6em auto;
+    margin-bottom: 4em;
     /*    transition: opacity .5s;*/
 }
 
 .spinner.fading {
-    /*    opacity: 0;*/
+        opacity: 0;
 }
 
 .spinner > div {
@@ -783,8 +784,8 @@ div.aboutMeLinkContainer a:hover {
     width: 6px;
     display: inline-block;
 
-    /*    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;*/
-    /*    animation: sk-stretchdelay 1.2s infinite ease-in-out;*/
+    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    animation: sk-stretchdelay 1.2s infinite ease-in-out;
 }
 
 .spinner .rect2 {
@@ -852,7 +853,7 @@ div.aboutMeLinkContainer a:hover {
     to {
         transform: translateX(100%);
         opacity: .4;
-/*        visibility: hidden;*/
+        /*        visibility: hidden;*/
     }
 }
 
@@ -877,6 +878,6 @@ div.aboutMeLinkContainer a:hover {
     to {
         transform: translateX(-100%);
         opacity: 0.1;
-/*        visibility: hidden;*/
+        /*        visibility: hidden;*/
     }
 }
