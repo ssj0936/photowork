@@ -1,5 +1,6 @@
 var photoView = (function () {
-    var ALL_PHOTO_IS_LOADED = false;
+    var ALL_PHOTO_IS_LOADED = false,
+        isPhototLoading = false;
 
     function onResize() {
         $(window).resize(function () {
@@ -88,7 +89,7 @@ var photoView = (function () {
         $('div#photoDetail').css('top', photoDetail.getCurrentScrollTop());
     }
 
-    function masonryfy(target) {
+    function masonryfy(target, lastone) {
         if ($(target).children('div.masonrySizer').length == 0) {
             jQuery('<div/>', {
                 class: 'masonrySizer'
@@ -104,7 +105,10 @@ var photoView = (function () {
 
         $masonry.imagesLoaded().always(function () {
             $(target).children('img.photoBlockImg.loading').removeClass('loading');
-            $('.spinner').addClass('fading');
+            if (lastone){
+                $('.spinner').addClass('fading');
+                isPhototLoading = false;
+            }
             $masonry.masonry('layout');
         });
     }
@@ -131,7 +135,7 @@ var photoView = (function () {
                             jQuery('<h3/>').text(photoset.title)
                         )
                     )
-//                    .prependTo("div#photopageContainer .spinner");
+                    //                    .prependTo("div#photopageContainer .spinner");
                     .appendTo("div#photopageContainer div.photopageContainer");
                 container = jQuery('<div/>', {
                     class: 'albumContent masonryObject',
@@ -165,6 +169,10 @@ var photoView = (function () {
         })
 
         lazyloader.lazyloaderSetup(function () {
+            if(isPhototLoading) return;
+            
+            isPhototLoading = true;
+            $('.spinner').removeClass('fading');
             lazyloaderAction();
             console.log('scrollToButton');
         });
@@ -172,9 +180,6 @@ var photoView = (function () {
 
     function lazyloaderAction() {
         if (ALL_PHOTO_IS_LOADED) return;
-
-        $('.spinner').removeClass('fading');
-
         let count = 0,
             firstLoadNum = lazyloader.getBookmarkCountPerLoad();
 
@@ -233,8 +238,9 @@ var photoView = (function () {
 
         if (count == 0)
             ALL_PHOTO_IS_LOADED = true;
-        $('.masonryObject').not('.masonryInited').each(function () {
-            masonryfy(this);
+        $('.masonryObject').each(function (index) {
+            var lastone = (index == $('.masonryObject').length - 1);
+            masonryfy(this, lastone);
         })
     }
 
