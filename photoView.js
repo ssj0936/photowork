@@ -172,7 +172,7 @@ var photoView = (function () {
             if(isPhototLoading) return;
             
             isPhototLoading = true;
-            $('.spinner').removeClass('fading');
+            
             lazyloaderAction();
             console.log('scrollToButton');
         });
@@ -180,6 +180,7 @@ var photoView = (function () {
 
     function lazyloaderAction() {
         if (ALL_PHOTO_IS_LOADED) return;
+        $('.spinner').removeClass('fading');
         let count = 0,
             firstLoadNum = lazyloader.getBookmarkCountPerLoad();
 
