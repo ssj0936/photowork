@@ -18,20 +18,7 @@ var lazyloader = (function () {
             });
 
         //for mobile draging
-//        document.body.addEventListener("touchstart", function (e) {
-//            onStart(e);
-//            _onScroll(callback);
-//        }, false);
-//
-//        function onStart(touchEvent) {
-//            if (navigator.userAgent.match(/Android/i)) {
-//                touchEvent.preventDefault();
-//            }
-//        }
-
         $(document.body).on('touchmove', function (event) {
-            console.log('touchmove fire');
-//            event.preventDefault();
             _onScroll(callback);
         });
     }
@@ -57,11 +44,11 @@ var lazyloader = (function () {
         }
 
         function isScrollToBottomTrigger() {
-            console.log($container.scrollTop());
-            console.log($container.height());
-            console.log(container.scrollHeight);
-            console.log('-------------------------------');
-            return ($container.scrollTop() + $container.height() >= container.scrollHeight)
+//            console.log($container.scrollTop());
+//            console.log($container.height());
+//            console.log(container.scrollHeight);
+//            console.log('-------------------------------');
+            return (($container.scrollTop() + $container.height()) >= (container.scrollHeight * 0.97))
         }
     }
 
