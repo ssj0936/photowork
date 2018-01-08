@@ -18,17 +18,29 @@ var lazyloader = (function () {
             });
 
         //for mobile draging
-        $(document.body).on('touchmove', function () {
-            event.preventDefault();
+//        document.body.addEventListener("touchstart", function (e) {
+//            onStart(e);
+//            _onScroll(callback);
+//        }, false);
+//
+//        function onStart(touchEvent) {
+//            if (navigator.userAgent.match(/Android/i)) {
+//                touchEvent.preventDefault();
+//            }
+//        }
+
+        $(document.body).on('touchmove', function (event) {
+            console.log('touchmove fire');
+//            event.preventDefault();
             _onScroll(callback);
-        }); // for mobile
+        });
     }
 
     function _onScroll(callback) {
         if (!$('div#photopageContainer').is(':visible')) return;
 
         var container = (isModile()) ? (document.body) : document.getElementById('mainPage'),
-            $container = (isModile()) ? $(window) : $('#mainPage') ;
+            $container = (isModile()) ? $(window) : $('#mainPage');
 
 
         if (isDownScrolling()) {
@@ -45,6 +57,10 @@ var lazyloader = (function () {
         }
 
         function isScrollToBottomTrigger() {
+            console.log($container.scrollTop());
+            console.log($container.height());
+            console.log(container.scrollHeight);
+            console.log('-------------------------------');
             return ($container.scrollTop() + $container.height() >= container.scrollHeight)
         }
     }
