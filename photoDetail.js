@@ -25,20 +25,17 @@ var photoDetail = (function () {
                     //                    console.log(photoGeter.getPrevPhoto(id));
                     if (photoGeter.getPrevPhoto(id) != null) {
                         $('div#photoDetail div#photoDetailImg img.photoDetailImg').addClass('photodetailSlideRight');
-//                        console.log(photoGeter.getPrevPhoto(id));
-                        photoView.imgPreload(photoGeter.getPrevPhoto(id));
+                        //                        console.log(photoGeter.getPrevPhoto(id));
+                        if (photoGeter.getPrevPhoto(photoGeter.getPrevPhoto(id).id) != null)
+                            photoView.imgPreload(photoGeter.getPrevPhoto(photoGeter.getPrevPhoto(id).id));
                         photoView.showDetailPhoto(photoGeter.getPrevPhoto(id));
-                        
+
                         if ($('div#exifInfoSection').hasClass('showing')) {
                             nav.exifDataViewShow();
                         }
                     } else {
                         console.log('First Photo');
                     }
-
-                    //if EXIF is showing
-                    //do something
-
                     console.log('prevPhoto');
                     break;
                 case 'backToPhotoWall':
@@ -60,9 +57,10 @@ var photoDetail = (function () {
                     //                    console.log(photoGeter.getNextPhoto(id));
                     if (photoGeter.getNextPhoto(id) != null) {
                         $('div#photoDetail div#photoDetailImg img.photoDetailImg').addClass('photodetailSlideLeft');
+                        //                        console.log(photoGeter.getNextPhoto(id));
+                        if (photoGeter.getNextPhoto(photoGeter.getNextPhoto(id).id) != null)
+                            photoView.imgPreload(photoGeter.getNextPhoto(photoGeter.getNextPhoto(id).id));
 
-//                        console.log(photoGeter.getNextPhoto(id));
-                        photoView.imgPreload(photoGeter.getNextPhoto(id));
                         photoView.showDetailPhoto(photoGeter.getNextPhoto(id));
 
                         if ($('div#exifInfoSection').hasClass('showing')) {
@@ -71,10 +69,6 @@ var photoDetail = (function () {
                     } else {
                         console.log('Last Photo');
                     }
-
-                    //if EXIF is showing
-                    //do something
-
                     break;
             }
         })

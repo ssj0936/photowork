@@ -48,7 +48,7 @@ var lazyloader = (function () {
 //            console.log($container.height());
 //            console.log(container.scrollHeight);
 //            console.log('-------------------------------');
-            return (($container.scrollTop() + $container.height()) >= (container.scrollHeight * 0.97))
+            return (($container.scrollTop() + $container.height()) >= (container.scrollHeight * 0.95))
         }
     }
 

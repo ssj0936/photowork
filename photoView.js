@@ -32,7 +32,11 @@ var photoView = (function () {
             if (isModile()) return;
 
             //image preload
-            var metaArr = [photoGeter.getPrevPhoto(photometa.id), photoGeter.getNextPhoto(photometa.id)];
+            var metaArr = [];
+            if(photoGeter.getPrevPhoto(photometa.id)!=null)
+                metaArr.push(photoGeter.getPrevPhoto(photometa.id));
+            if(photoGeter.getNextPhoto(photometa.id)!=null)
+                metaArr.push(photoGeter.getNextPhoto(photometa.id));
             imgPreload(metaArr);
             showDetailPhoto(photometa);
         })
