@@ -11,12 +11,15 @@ var lazyloader = (function () {
         //            _onScroll(container,callback)
         //        });
 
+        //for desktop scrolling
         $container
             .on('scroll', function () {
                 _onScroll(callback);
             });
 
+        //for mobile draging
         $(document.body).on('touchmove', function () {
+            event.preventDefault();
             _onScroll(callback);
         }); // for mobile
     }
